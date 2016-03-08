@@ -30,4 +30,6 @@ public class Game {
         long seed = System.nanoTime();
         Collections.shuffle(deck, new Random(seed));
     }
+
+    /* Start a new game by dealing two cards to each player */
 }

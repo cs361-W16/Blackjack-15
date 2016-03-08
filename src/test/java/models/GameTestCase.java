@@ -21,7 +21,7 @@ public class GameTestCase {
     }
 
     @Test
-    public void testGameInit(){
+    public void testGameInit() {
         Game unshuffled = new Game();
         unshuffled.buildDeck();
 
@@ -48,5 +48,16 @@ public class GameTestCase {
 
         // Ensure that shuffled deck is at least 85% unique
         assertTrue((matches / size) <= 0.15);
+    }
+
+    @Test
+    public void testStartGame() {
+        int number_of_players = 1;
+        int start_chips = 100;
+        Game g = new Game();
+
+        g.startGame(number_of_players, start_chips);
+        assertEquals(1, g.players);
+
     }
 }
