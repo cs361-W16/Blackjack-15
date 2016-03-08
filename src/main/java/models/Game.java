@@ -24,4 +24,10 @@ public class Game {
             deck.add(new Card(i,Suit.spades));
         }
     }
+
+    /* Shuffle the deck */
+    public void shuffle() {
+        long seed = System.nanoTime();
+        Collections.shuffle(deck, new Random(seed));
+    }
 }
