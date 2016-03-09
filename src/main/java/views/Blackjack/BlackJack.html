@@ -1,0 +1,100 @@
+<link href="/assets/css/AcesUp.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.3/angular-material.min.css" rel="stylesheet">
+<script type="text/javascript" src="/assets/webjars/jquery/2.1.3/jquery.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.3/angular-material.js"></script>
+<script type="text/javascript" src="https://code.angularjs.org/1.5.0-rc.2/angular-animate.js"></script>
+<script type="text/javascript" src="https://code.angularjs.org/1.5.0-rc.2/angular-aria.js"></script>
+<script type="text/javascript" src="/assets/js/app.js"></script>
+<script type="text/javascript" src="/assets/js/AcesUpController.js"></script>
+
+<body ng-app="AcesUp" ng-controller="AcesUpController">
+    <div class="wrapper">
+        <div id="header">
+            <h1 class="md-display-3">
+                Aces Up
+            </h1>
+        </div>
+        <div id="board">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <span>
+                        Score: {{score}}
+                    </span>
+                    <span flex></span>
+                    <md-button ng-click="resetGame()">
+                        NEW GAME
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <div id="columnWrapper">
+                <div class="column">
+                    <div class="card" ng-repeat="card in gameState.cols[0]">
+                        <img class="card-img" ng-class="{'offset': ($first == false)}" ng-src="/assets/img/{{card.value}}_of_{{card.suit}}.png">
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card" ng-repeat="card in gameState.cols[1]">
+                        <img class="card-img" ng-class="{'offset': ($first == false)}" ng-src="/assets/img/{{card.value}}_of_{{card.suit}}.png">
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card" ng-repeat="card in gameState.cols[2]">
+                        <img class="card-img" ng-class="{'offset': ($first == false)}" ng-src="/assets/img/{{card.value}}_of_{{card.suit}}.png">
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card" ng-repeat="card in gameState.cols[3]">
+                        <img class="card-img" ng-class="{'offset': ($first == false)}" ng-src="/assets/img/{{card.value}}_of_{{card.suit}}.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-main">
+            <div style="display: flex;">
+                <md-button ng-click="dealCards()" class="md-raised md-warn">Deal</md-button>
+                <span flex></span>
+                <div>
+                    <span>Remove from:</span>
+                    <md-button ng-click="removeCard(0)" class="md-raised md-primary">Column1</md-button>
+                    <md-button ng-click="removeCard(1)" class="md-raised md-primary">Column2</md-button>
+                    <md-button ng-click="removeCard(2)" class="md-raised md-primary">Column3</md-button>
+                    <md-button ng-click="removeCard(3)" class="md-raised md-primary">Column4</md-button>
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <span flex></span>
+                <md-input-container style="margin-right: 10px;">
+                    <label>Source</label>
+                    <md-select ng-model="srcCol">
+                        <md-option ng-repeat="col in colOptions" value="{{col}}">{{col + 1}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container style="margin-right: 10px;">
+                    <label>Destination</label>
+                    <md-select ng-model="destCol">
+                        <md-option ng-repeat="col in colOptions" value="{{col}}">{{col + 1}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-button ng-click="moveCard(srcCol, destCol)" class="md-primary md-raised">Move</md-button>
+            </div>
+
+            <div style="display: flex; margin-left: 16px;">
+                <md-input-container style="margin-right: 10px;">
+                    <label>Select Locale</label>
+                    <md-select ng-model="locale" ng-change="chooseGame()">
+                        <md-option ng-repeat="locale in locales" value="{{locale}}">{{locale}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+
+    <!-- On error -->
+    <div id="dimmer" ng-show="invalidMove == true">
+		<p>Invalid Move!</p>
+	</div>
+</body>
+</html>
