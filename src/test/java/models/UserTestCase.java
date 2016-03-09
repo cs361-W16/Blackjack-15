@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class UserTestCase {
 
     @Test
-    public void testAddToHand() {
+    public void testPushHand() {
         Card card = new Card(3, Suit.clubs);
         User user = new User();
 

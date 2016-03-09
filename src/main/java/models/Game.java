@@ -10,6 +10,7 @@ public class Game {
     public User player = new User();
     public User dealer = new User();
     private int current_bet;
+    private int round_winner = 0;
 
 
     /* Default constructor deals to only one player */
@@ -91,7 +92,7 @@ public class Game {
     }
 
 
-    /* Handles the dealer hit/hold logic */
+    /* Handles the dealer hit/stay logic */
     public void dealerTurn() {
         int dealer_limit = 17;
         int dealer_hand_value = dealer.getHandValue();
@@ -111,13 +112,19 @@ public class Game {
         int player_hand_value = player.getHandValue();
         int dealer_hand_value = dealer.getHandValue();
 
-        if (player_hand_value > dealer_hand_value) {
+        /* Player wins */
+        if (dealer_hand_value > 21 || player_hand_value > dealer_hand_value) {
+            round_winner = 1;
             return 1;
         }
+        /* Dealer wins */
         else if (player_hand_value < dealer_hand_value) {
+            round_winner = 0;
             return 0;
         }
+        /* Tie */
         else {
+            round_winner = 2;
             return 2;
         }
     }

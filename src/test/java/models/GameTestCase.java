@@ -113,7 +113,7 @@ public class GameTestCase {
         int dealer_hand_value = g.dealer.getHandValue();
         g.dealerTurn();
 
-        // Dealer holds
+        // Dealer stays
         if (dealer_hand_value >= dealer_limit) {
             assertTrue(g.dealer.getHandValue() == dealer_hand_value);
         }
@@ -125,11 +125,28 @@ public class GameTestCase {
 
 
     @Test
+    public void testDetermineWinnerDealerBust() {
+        int dealer_limit = 17;
+        int start_chips = 100;
+        Game g = new Game();
+
+        // Give the user a card
+        g.player.pushHand(new Card(2, Suit.spades));
+
+        // Give the dealer over 21 
+        g.dealer.pushHand(new Card(10, Suit.spades));
+        g.dealer.pushHand(new Card(10, Suit.hearts));
+        g.dealer.pushHand(new Card(2, Suit.hearts));
+
+        assertEquals(1, g.determineWinner());
+    }
+
+
+    @Test
     public void testDetermineWinnerPlayer() {
         int dealer_limit = 17;
         int start_chips = 100;
         Game g = new Game();
-        g.startGame(start_chips);
 
         /* Set player's hand to be greater than dealer */
         g.player.pushHand(new Card(10, Suit.clubs));
@@ -147,7 +164,6 @@ public class GameTestCase {
         int dealer_limit = 17;
         int start_chips = 100;
         Game g = new Game();
-        g.startGame(start_chips);
 
         /* Set player's hand to be greater than dealer */
         g.player.pushHand(new Card(2, Suit.clubs));
@@ -165,7 +181,6 @@ public class GameTestCase {
         int dealer_limit = 17;
         int start_chips = 100;
         Game g = new Game();
-        g.startGame(start_chips);
 
         /* Set player's hand to be greater than dealer */
         g.player.pushHand(new Card(10, Suit.clubs));
@@ -176,6 +191,7 @@ public class GameTestCase {
 
         assertEquals(2, g.determineWinner());
     }
+
 
 
 
