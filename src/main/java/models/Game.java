@@ -99,7 +99,15 @@ public class Game {
         while (dealer_hand_size <= dealer_limit) {
             hit(dealer);
             dealer_hand_size = dealer.getHandSize();
+
+            // Debugging
             System.out.print("Dealer hand: " + dealer_hand_size);
         }
     }
+
+
+    /* Determines the winner. Returns 1 if player, 0 if dealer. */
+    // public int determineWinner() {
+    //     player_hand_value = 
+    // }
 }

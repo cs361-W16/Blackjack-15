@@ -35,6 +35,18 @@ public class User {
 	}
 
 
+	/* Returns the total value of all cards in hand */
+	public int getHandValue() {
+		int hand_value = 0;
+
+		// Iterate through all the cards and add to sum */
+		for (int i = 0; i < hand.size(); i++) {
+			hand_value = hand_value + hand.get(i).getValue();
+		}
+		return hand_value;
+	}
+
+
 	/* Sets the user's money to given parameter value */
 	public void setMoney(int new_money) {
 		money = new_money;

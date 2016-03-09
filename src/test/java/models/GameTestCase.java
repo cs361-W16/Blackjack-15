@@ -123,6 +123,24 @@ public class GameTestCase {
         }
     }
 
+
+    @Test
+    public void testDetermineWinnerPlayer() {
+        int dealer_limit = 17;
+        int start_chips = 100;
+        Game g = new Game();
+        g.startGame(start_chips);
+
+        /* Set player's hand to be greater than dealer */
+        g.player.pushHand(new Card(10, Suit.clubs));
+        g.player.pushHand(new Card(10, Suit.spades));
+
+        g.dealer.pushHand(new Card(10, Suit.hearts));
+        g.dealer.pushHand(new Card(7, Suit.hearts));
+
+        assertTrue(1, g.determineWinner());
+    }
+
     
 
 }
