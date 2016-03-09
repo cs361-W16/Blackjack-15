@@ -18,7 +18,7 @@ public class UserTestCase {
 
 
     @Test
-    public void testAddToMoney() {
+    public void testAddMoney() {
         User user = new User();
 
         user.setMoney(0);

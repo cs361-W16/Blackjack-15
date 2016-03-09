@@ -11,6 +11,7 @@ public class Game {
     public User dealer = new User();
     private int current_bet;
     private int round_winner = 0;
+    private int bet_factor = 2;
 
 
     /* Default constructor deals to only one player */
@@ -68,8 +69,7 @@ public class Game {
         player.setMoney(start_chips);
 
         /* Set the starting bet */
-        player.subtractMoney(2);
-        current_bet = 2;
+        raiseBet(starting_bet);
     }
     
 
@@ -115,6 +115,7 @@ public class Game {
         /* Player wins */
         if (dealer_hand_value > 21 || player_hand_value > dealer_hand_value) {
             round_winner = 1;
+            player.addMoney(current_bet * bet_factor);
             return 1;
         }
         /* Dealer wins */

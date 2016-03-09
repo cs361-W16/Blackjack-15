@@ -159,6 +159,27 @@ public class GameTestCase {
     }
 
 
+    @Test
+    public void testDetermineWinnerPlayerMoney() {
+        int dealer_limit = 17;
+        int start_chips = 100;
+        Game g = new Game();
+        g.player.setMoney(100);
+        g.raiseBet(20);
+
+        /* Set player's hand to be greater than dealer */
+        g.player.pushHand(new Card(10, Suit.clubs));
+        g.player.pushHand(new Card(10, Suit.spades));
+
+        g.dealer.pushHand(new Card(10, Suit.hearts));
+        g.dealer.pushHand(new Card(7, Suit.hearts));
+
+        /* Determine that player's money is increased by correct amount */
+        g.determineWinner();
+        assertEquals(120, g.player.getMoney());
+    }
+
+
     @Test 
     public void testDetermineWinnerDealer() {
         int dealer_limit = 17;
