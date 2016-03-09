@@ -22,10 +22,10 @@ public class Game {
     public void buildDeck() {
         /* Add 14 cards per suit */
         for(int i = 2; i < 15; i++){
-            deck.add(new Card(i,Suit.clubs));
-            deck.add(new Card(i,Suit.hearts));
-            deck.add(new Card(i,Suit.diamonds));
-            deck.add(new Card(i,Suit.spades));
+            deck.add(new Card(i, Suit.clubs));
+            deck.add(new Card(i, Suit.hearts));
+            deck.add(new Card(i, Suit.diamonds));
+            deck.add(new Card(i, Suit.spades));
         }
     }
 
@@ -37,7 +37,7 @@ public class Game {
         deck.remove(deck.size() - 1);
 
         // Give to user
-        user.addToHand(new_card);
+        user.pushHand(new_card);
     }
 
 

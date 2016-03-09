@@ -6,17 +6,32 @@ import java.util.Random;
 
 public class User {
 	/* Attributes */
-	public java.util.List<Card> hand = new ArrayList<>();
+	private java.util.List<Card> hand = new ArrayList<>();
+	private int money;
 
 
 	/* Methods */
+
 	public User() {
 
 	}
 
 
-	public void addToHand(Card new_card) {
+	/* Returns the last card in the hand */
+	public Card peekHand() {
+		return hand.get(hand.size());
+	}
+
+
+	/* Adds a card to the hand */
+	public void pushHand(Card new_card) {
 		hand.add(new_card);
+	}
+
+
+	/* Returns number of cards in hand */
+	public int getHandSize() {
+		return hand.size();
 	}
 
 

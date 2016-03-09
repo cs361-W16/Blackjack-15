@@ -21,13 +21,23 @@ public class GameTestCase {
     }
 
     @Test
-    public void testHit() {
+    public void testHitPlayer() {
         Game g = new Game();
         g.buildDeck();
 
         g.hit(g.player);
-        assertEquals(1, g.player.hand.size());
+        assertEquals(1, g.player.getHandSize());
     }
+
+    @Test
+    public void testHitDealer() {
+        Game g = new Game();
+        g.buildDeck();
+
+        g.hit(g.dealer);
+        assertEquals(1, g.dealer.getHandSize());
+    }
+
 
     @Test
     public void testNewRound() {
@@ -64,12 +74,8 @@ public class GameTestCase {
         int start_chips = 100;
         Game g = new Game();
         
-
         g.startGame(start_chips);
-        // System.out.print(g.player.hand.size());
-        // assertEquals(1, g.player.hand.size());
-        // assertEquals(2, g.players[0].hand.size());
-
+        assertEquals(2, g.player.getHandSize());
     }
 
     
