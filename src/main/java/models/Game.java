@@ -7,14 +7,14 @@ import java.util.Random;
 public class Game {
     /* Attributes */
     public java.util.List<Card> deck = new ArrayList<>();
-    public java.util.List<User> players = new ArrayList<>();
-    public User dealer;
+    public User player = new User();
+    public User dealer = new User();
+    public int current_bet;
 
 
     /* Default constructor deals to only one player */
     public Game() {
-        dealer = new User(0);
-        players.add(new User(0));
+
     }
 
 
@@ -29,7 +29,8 @@ public class Game {
         }
     }
 
-    /* Deal a random card to the provided user */
+
+    /* Deal a random card to the either the user or dealer */
     public void hit(User user) {
         // Pull from deck
         Card new_card = deck.get(deck.size() - 1);
@@ -48,19 +49,15 @@ public class Game {
 
 
     /* Start a new game by dealing two cards to each player */
-    public void startGame(int number_of_players, int start_chips) {
-        // Initialize number of players (not including dealer)
-        for (int i = 0; i < number_of_players; i++) {
-            players.add(new User(i));
-        }
+    public void startGame(int start_chips) {
+        // Initialize deck
+        buildDeck();
 
-        /* Give each player 2 cards to start */
-        for (int i = 0; i < number_of_players; i++) {
-            hit(players.get(i));
-            hit(players.get(i));
-        }
-
-        // Give the dealer 2 cards to start
+        /* Give player 2 cards to start */
+        hit(player);
+        hit(player);
+        
+        /* Give the dealer 2 cards to start */
         hit(dealer);
         hit(dealer);
     }

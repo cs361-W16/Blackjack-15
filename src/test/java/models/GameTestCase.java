@@ -25,9 +25,8 @@ public class GameTestCase {
         Game g = new Game();
         g.buildDeck();
 
-        g.hit(g.players.get(0));
-        assertEquals(1, g.players.get(0).hand.size());
-
+        g.hit(g.player);
+        assertEquals(1, g.player.hand.size());
     }
 
     @Test
@@ -62,13 +61,13 @@ public class GameTestCase {
 
     @Test
     public void testStartGame() {
-        int number_of_players = 1;
         int start_chips = 100;
         Game g = new Game();
-        g.
+        
 
-        g.startGame(number_of_players, start_chips);
-        assertEquals(1, g.players.size());
+        g.startGame(start_chips);
+        // System.out.print(g.player.hand.size());
+        // assertEquals(1, g.player.hand.size());
         // assertEquals(2, g.players[0].hand.size());
 
     }

@@ -6,13 +6,12 @@ import java.util.Random;
 
 public class User {
 	/* Attributes */
-	public int id;
 	public java.util.List<Card> hand = new ArrayList<>();
 
 
 	/* Methods */
-	public User(int id) {
-		id = id;
+	public User() {
+
 	}
 
 
