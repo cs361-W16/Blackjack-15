@@ -40,7 +40,7 @@ public class GameTestCase {
 
 
     @Test
-    public void testNewRound() {
+    public void testShuffle() {
         Game unshuffled = new Game();
         unshuffled.buildDeck();
 
@@ -60,7 +60,7 @@ public class GameTestCase {
             Suit shuffledSuit = shuffledCard.getSuit();
             int shuffledVal = shuffledCard.getValue();
 
-            if(unshuffledSuit == shuffledSuit && unshuffledVal == shuffledVal){
+            if(unshuffledSuit == shuffledSuit && unshuffledVal == shuffledVal) {
                 matches++;
             }
         }
@@ -69,6 +69,7 @@ public class GameTestCase {
         assertTrue((matches / size) <= 0.15);
     }
 
+
     @Test
     public void testStartGame() {
         int start_chips = 100;
@@ -76,6 +77,28 @@ public class GameTestCase {
         
         g.startGame(start_chips);
         assertEquals(2, g.player.getHandSize());
+        assertEquals(98, g.player.getMoney());
+    }
+
+
+    @Test
+    public void testRaiseBetInvalid() {
+        int start_chips = 10;
+        Game g = new Game();
+        g.startGame(start_chips);
+
+        assertEquals(0, g.raiseBet(20));
+    }
+
+
+    @Test
+    public void testRaiseBetValid() {
+        int start_chips = 100;
+        Game g = new Game();
+        g.startGame(start_chips);
+
+        g.raiseBet(20);
+        assertEquals(22, g.getCurrentBet());
     }
 
     

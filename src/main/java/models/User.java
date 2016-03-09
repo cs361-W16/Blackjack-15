@@ -19,7 +19,7 @@ public class User {
 
 	/* Returns the last card in the hand */
 	public Card peekHand() {
-		return hand.get(hand.size());
+		return hand.get(hand.size() - 1);
 	}
 
 
@@ -35,5 +35,33 @@ public class User {
 	}
 
 
+	/* Sets the user's money to given parameter value */
+	public void setMoney(int new_money) {
+		money = new_money;
+	}
+
+
+	/* Adds given value to money */
+	public void addMoney(int addition) {
+		money = money + addition;
+	}
+
+
+	/* Subtracts given value from money. Returns 1 if user has enough to subtract, 0 otherwise. */
+	public int subtractMoney(int subtraction) {
+		if (money >= subtraction) {
+			money = money - subtraction;
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
+
+	/* Returns user's money */
+	public int getMoney() {
+		return money;
+	}
 
 }

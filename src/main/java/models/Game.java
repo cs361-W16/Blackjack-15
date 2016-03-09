@@ -9,7 +9,7 @@ public class Game {
     public java.util.List<Card> deck = new ArrayList<>();
     public User player = new User();
     public User dealer = new User();
-    public int current_bet;
+    private int current_bet;
 
 
     /* Default constructor deals to only one player */
@@ -50,6 +50,8 @@ public class Game {
 
     /* Start a new game by dealing two cards to each player */
     public void startGame(int start_chips) {
+        int starting_bet = 2;
+
         // Initialize deck
         buildDeck();
 
@@ -60,5 +62,31 @@ public class Game {
         /* Give the dealer 2 cards to start */
         hit(dealer);
         hit(dealer);
+
+        // Give player starting chips
+        player.setMoney(start_chips);
+
+        /* Set the starting bet */
+        player.subtractMoney(2);
+        current_bet = 2;
+    }
+    
+
+    /* Return the current bet */
+    public int getCurrentBet() {
+        return current_bet;
+    }
+
+
+    /* Raise the current bet by the given value. Returns 1 if user has enough money, 0 otherwise. */
+    public int raiseBet(int raise) {
+        if (player.subtractMoney(raise) == 1) {
+            current_bet = current_bet + raise;
+
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 }
