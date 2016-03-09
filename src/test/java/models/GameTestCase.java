@@ -21,7 +21,17 @@ public class GameTestCase {
     }
 
     @Test
-    public void testGameInit() {
+    public void testHit() {
+        Game g = new Game();
+        g.buildDeck();
+
+        g.hit(g.players.get(0));
+        assertEquals(1, g.players.get(0).hand.size());
+
+    }
+
+    @Test
+    public void testNewRound() {
         Game unshuffled = new Game();
         unshuffled.buildDeck();
 
@@ -55,9 +65,14 @@ public class GameTestCase {
         int number_of_players = 1;
         int start_chips = 100;
         Game g = new Game();
+        g.
 
         g.startGame(number_of_players, start_chips);
-        assertEquals(1, g.players);
+        assertEquals(1, g.players.size());
+        // assertEquals(2, g.players[0].hand.size());
 
     }
+
+    
+
 }
