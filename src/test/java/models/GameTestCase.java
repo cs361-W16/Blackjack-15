@@ -110,16 +110,16 @@ public class GameTestCase {
         g.startGame(start_chips);
 
         /* Check that the dealer only hits if below 17 */
-        int dealer_hand_size = g.dealer.getHandSize();
+        int dealer_hand_value = g.dealer.getHandValue();
         g.dealerTurn();
 
         // Dealer holds
-        if (dealer_hand_size >= dealer_limit) {
-            assertTrue(g.dealer.getHandSize() == dealer_hand_size);
+        if (dealer_hand_value >= dealer_limit) {
+            assertTrue(g.dealer.getHandValue() == dealer_hand_value);
         }
         // Dealer hits
         else {
-            assertTrue(g.dealer.getHandSize() > dealer_hand_size);
+            assertTrue(g.dealer.getHandValue() > dealer_hand_value);
         }
     }
 
@@ -138,8 +138,47 @@ public class GameTestCase {
         g.dealer.pushHand(new Card(10, Suit.hearts));
         g.dealer.pushHand(new Card(7, Suit.hearts));
 
-        assertTrue(1, g.determineWinner());
+        assertEquals(1, g.determineWinner());
     }
+
+
+    @Test 
+    public void testDetermineWinnerDealer() {
+        int dealer_limit = 17;
+        int start_chips = 100;
+        Game g = new Game();
+        g.startGame(start_chips);
+
+        /* Set player's hand to be greater than dealer */
+        g.player.pushHand(new Card(2, Suit.clubs));
+        g.player.pushHand(new Card(3, Suit.spades));
+
+        g.dealer.pushHand(new Card(10, Suit.hearts));
+        g.dealer.pushHand(new Card(7, Suit.hearts));
+
+        assertEquals(0, g.determineWinner());
+    }
+
+
+    @Test 
+    public void testDetermineWinnerTie() {
+        int dealer_limit = 17;
+        int start_chips = 100;
+        Game g = new Game();
+        g.startGame(start_chips);
+
+        /* Set player's hand to be greater than dealer */
+        g.player.pushHand(new Card(10, Suit.clubs));
+        g.player.pushHand(new Card(10, Suit.spades));
+
+        g.dealer.pushHand(new Card(10, Suit.hearts));
+        g.dealer.pushHand(new Card(10, Suit.diamonds));
+
+        assertEquals(2, g.determineWinner());
+    }
+
+
+
 
     
 

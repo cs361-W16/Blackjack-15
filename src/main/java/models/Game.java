@@ -94,20 +94,31 @@ public class Game {
     /* Handles the dealer hit/hold logic */
     public void dealerTurn() {
         int dealer_limit = 17;
-        int dealer_hand_size = dealer.getHandSize();
+        int dealer_hand_value = dealer.getHandValue();
 
-        while (dealer_hand_size <= dealer_limit) {
+        while (dealer_hand_value <= dealer_limit) {
             hit(dealer);
-            dealer_hand_size = dealer.getHandSize();
+            dealer_hand_value = dealer.getHandValue();
 
             // Debugging
-            System.out.print("Dealer hand: " + dealer_hand_size);
+            System.out.print("Dealer hand: " + dealer_hand_value);
         }
     }
 
 
-    /* Determines the winner. Returns 1 if player, 0 if dealer. */
-    // public int determineWinner() {
-    //     player_hand_value = 
-    // }
+    /* Determines the winner. Returns 1 if player, 0 if dealer, 2 if tie. */
+    public int determineWinner() {
+        int player_hand_value = player.getHandValue();
+        int dealer_hand_value = dealer.getHandValue();
+
+        if (player_hand_value > dealer_hand_value) {
+            return 1;
+        }
+        else if (player_hand_value < dealer_hand_value) {
+            return 0;
+        }
+        else {
+            return 2;
+        }
+    }
 }
