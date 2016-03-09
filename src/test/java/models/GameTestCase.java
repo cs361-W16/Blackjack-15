@@ -101,6 +101,28 @@ public class GameTestCase {
         assertEquals(22, g.getCurrentBet());
     }
 
+
+    @Test
+    public void testDealerRules() {
+        int dealer_limit = 17;
+        int start_chips = 100;
+        Game g = new Game();
+        g.startGame(start_chips);
+
+        /* Check that the dealer only hits if below 17 */
+        int dealer_hand_size = g.dealer.getHandSize();
+        g.dealerTurn();
+
+        // Dealer holds
+        if (dealer_hand_size >= dealer_limit) {
+            assertTrue(g.dealer.getHandSize() == dealer_hand_size);
+        }
+        // Dealer hits
+        else {
+            assertTrue(g.dealer.getHandSize() > dealer_hand_size);
+        }
+    }
+
     
 
 }

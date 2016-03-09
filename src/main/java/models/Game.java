@@ -89,4 +89,17 @@ public class Game {
             return 0;
         }
     }
+
+
+    /* Handles the dealer hit/hold logic */
+    public void dealerTurn() {
+        int dealer_limit = 17;
+        int dealer_hand_size = dealer.getHandSize();
+
+        while (dealer_hand_size <= dealer_limit) {
+            hit(dealer);
+            dealer_hand_size = dealer.getHandSize();
+            System.out.print("Dealer hand: " + dealer_hand_size);
+        }
+    }
 }
