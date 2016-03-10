@@ -26,6 +26,8 @@ import org.hamcrest.CoreMatchers;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
+import models.Game;
+
 public class ApiControllerDocTesterTest extends NinjaDocTester {
     
     String URL_INDEX = "/";
@@ -71,7 +73,17 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
             Request.GET().url(
                 testServerUrl().path("/new_game")));
 
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+
+        System.out.print(request_game.deck.size());
+
+
         assertThat(response.payload, containsString("deck"));
+        // assertThat(response.payload, )
     }
+
+
+    
 
 }
