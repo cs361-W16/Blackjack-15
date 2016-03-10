@@ -13,7 +13,7 @@ public class UserTestCase {
 
         user.pushHand(card);
         assertEquals(card, user.peekHand());
-        assertEquals(1, user.getHandSize());
+        assertEquals(1, user.fetchHandSize());
     }
 
 
@@ -24,7 +24,7 @@ public class UserTestCase {
         user.setMoney(0);
         user.addMoney(20);
 
-        assertEquals(20, user.getMoney());
+        assertEquals(20, user.fetchMoney());
     }
 
 
@@ -52,7 +52,7 @@ public class UserTestCase {
         user.pushHand(new Card(3, Suit.spades));
         user.pushHand(new Card(4, Suit.hearts));
 
-        assertEquals(7, user.getHandValue());
+        assertEquals(7, user.fetchHandValue());
     }
 
 }

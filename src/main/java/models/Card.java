@@ -18,12 +18,12 @@ public class Card implements Serializable {
     }
 
 
-    public Suit getSuit() {
+    public Suit fetchSuit() {
         return suit;
     }
 
 
-    public int getValue() {
+    public int fetchValue() {
         return value;
     }
 
