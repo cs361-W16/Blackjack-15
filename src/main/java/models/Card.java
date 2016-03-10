@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
+
 public class Card implements Serializable {
     public final int value;
     public final Suit suit;
