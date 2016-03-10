@@ -30,18 +30,18 @@ public class User {
 
 
 	/* Returns number of cards in hand */
-	public int getHandSize() {
+	public int fetchHandSize() {
 		return hand.size();
 	}
 
 
 	/* Returns the total value of all cards in hand */
-	public int getHandValue() {
+	public int fetchHandValue() {
 		int hand_value = 0;
 
 		// Iterate through all the cards and add to sum */
 		for (int i = 0; i < hand.size(); i++) {
-			hand_value = hand_value + hand.get(i).getValue();
+			hand_value = hand_value + hand.get(i).fetchValue();
 		}
 		return hand_value;
 	}
@@ -72,7 +72,7 @@ public class User {
 
 
 	/* Returns user's money */
-	public int getMoney() {
+	public int fetchMoney() {
 		return money;
 	}
 

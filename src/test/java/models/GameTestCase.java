@@ -26,7 +26,7 @@ public class GameTestCase {
         g.buildDeck();
 
         g.hit(g.player);
-        assertEquals(1, g.player.getHandSize());
+        assertEquals(1, g.player.fetchHandSize());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class GameTestCase {
         g.buildDeck();
 
         g.hit(g.dealer);
-        assertEquals(1, g.dealer.getHandSize());
+        assertEquals(1, g.dealer.fetchHandSize());
     }
 
 
@@ -55,10 +55,10 @@ public class GameTestCase {
             Card unshuffledCard = unshuffled.deck.get(i);
             Card shuffledCard = shuffled.deck.get(i);
 
-            Suit unshuffledSuit = unshuffledCard.getSuit();
-            int unshuffledVal = unshuffledCard.getValue();
-            Suit shuffledSuit = shuffledCard.getSuit();
-            int shuffledVal = shuffledCard.getValue();
+            Suit unshuffledSuit = unshuffledCard.fetchSuit();
+            int unshuffledVal = unshuffledCard.fetchValue();
+            Suit shuffledSuit = shuffledCard.fetchSuit();
+            int shuffledVal = shuffledCard.fetchValue();
 
             if(unshuffledSuit == shuffledSuit && unshuffledVal == shuffledVal) {
                 matches++;
@@ -76,8 +76,8 @@ public class GameTestCase {
         Game g = new Game();
         
         g.startGame(start_chips);
-        assertEquals(2, g.player.getHandSize());
-        assertEquals(98, g.player.getMoney());
+        assertEquals(2, g.player.fetchHandSize());
+        assertEquals(98, g.player.fetchMoney());
     }
 
 
@@ -98,7 +98,7 @@ public class GameTestCase {
         g.startGame(start_chips);
 
         g.raiseBet(20);
-        assertEquals(22, g.getCurrentBet());
+        assertEquals(22, g.fetchCurrentBet());
     }
 
 
@@ -110,16 +110,16 @@ public class GameTestCase {
         g.startGame(start_chips);
 
         /* Check that the dealer only hits if below 17 */
-        int dealer_hand_value = g.dealer.getHandValue();
+        int dealer_hand_value = g.dealer.fetchHandValue();
         g.dealerTurn();
 
         // Dealer stays
         if (dealer_hand_value >= dealer_limit) {
-            assertTrue(g.dealer.getHandValue() == dealer_hand_value);
+            assertTrue(g.dealer.fetchHandValue() == dealer_hand_value);
         }
         // Dealer hits
         else {
-            assertTrue(g.dealer.getHandValue() > dealer_hand_value);
+            assertTrue(g.dealer.fetchHandValue() > dealer_hand_value);
         }
     }
 
@@ -176,7 +176,7 @@ public class GameTestCase {
 
         /* Determine that player's money is increased by correct amount */
         g.determineWinner();
-        assertEquals(120, g.player.getMoney());
+        assertEquals(120, g.player.fetchMoney());
     }
 
 
