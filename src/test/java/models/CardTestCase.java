@@ -7,9 +7,9 @@ import static org.junit.Assert.*;
 
 public class CardTestCase {
     @Test
-    public void testGetSuit() {
+    public void testFetchSuit() {
         Card c = new Card(5,Suit.clubs);
-        assertEquals(Suit.clubs,c.getSuit());
+        assertEquals(Suit.clubs,c.fetchSuit());
     }
 
     @Test
@@ -19,8 +19,8 @@ public class CardTestCase {
     }
 
     @Test
-    public void testGetValue() {
+    public void testFetchValue() {
         Card c = new Card(5, Suit.clubs);
-        assertEquals(5, c.getValue());
+        assertEquals(5, c.fetchValue());
     }
 }

@@ -74,7 +74,7 @@ public class Game {
     
 
     /* Return the current bet */
-    public int getCurrentBet() {
+    public int fetchCurrentBet() {
         return current_bet;
     }
 
@@ -95,11 +95,11 @@ public class Game {
     /* Handles the dealer hit/stay logic */
     public void dealerTurn() {
         int dealer_limit = 17;
-        int dealer_hand_value = dealer.getHandValue();
+        int dealer_hand_value = dealer.fetchHandValue();
 
         while (dealer_hand_value <= dealer_limit) {
             hit(dealer);
-            dealer_hand_value = dealer.getHandValue();
+            dealer_hand_value = dealer.fetchHandValue();
 
             // Debugging
             System.out.print("Dealer hand: " + dealer_hand_value);
@@ -109,8 +109,8 @@ public class Game {
 
     /* Determines the winner. Returns 1 if player, 0 if dealer, 2 if tie. */
     public int determineWinner() {
-        int player_hand_value = player.getHandValue();
-        int dealer_hand_value = dealer.getHandValue();
+        int player_hand_value = player.fetchHandValue();
+        int dealer_hand_value = dealer.fetchHandValue();
 
         /* Player wins */
         if (dealer_hand_value > 21 || player_hand_value > dealer_hand_value) {
