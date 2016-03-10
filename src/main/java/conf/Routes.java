@@ -34,6 +34,7 @@ public class Routes implements ApplicationRoutes {
         // Blackjack routes
         ///////////////////////////////////////////////////////////////////////   
         router.GET().route("/new_game").with(ApplicationController.class, "newGame");
+        router.POST().route("/hit").with(ApplicationController.class, "hit");
         
  
         ///////////////////////////////////////////////////////////////////////

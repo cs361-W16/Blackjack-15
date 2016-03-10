@@ -18,6 +18,7 @@ package controllers;
 
 import ninja.Result;
 import ninja.Results;
+import ninja.Context;
 import models.Game;
 import com.google.inject.Singleton;
 
@@ -46,6 +47,8 @@ public class ApplicationController {
         
     }
 
+    /* Blackjack controllers */
+
 
     /* Get new game */
     public Result newGame() {
@@ -53,6 +56,16 @@ public class ApplicationController {
         Game game = new Game();
         game.startGame(start_chips);
 
+        // System.out.print(Results.json().render(game));
+
         return Results.json().render(game);
+    }
+
+
+    /* Give the player another card */
+    public Result hit(Context context, Game current_game) {
+        // current_game.hit();
+
+        return Results.json().render(current_game);
     }
 }

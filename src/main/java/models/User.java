@@ -3,8 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
 	/* Attributes */
 	private java.util.List<Card> hand = new ArrayList<>();
 	private int money;

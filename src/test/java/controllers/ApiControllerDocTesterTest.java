@@ -24,7 +24,7 @@ import org.doctester.testbrowser.Request;
 import org.doctester.testbrowser.Response;
 import org.hamcrest.CoreMatchers;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import models.Game;
 
@@ -74,13 +74,26 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
                 testServerUrl().path("/new_game")));
 
         // Parse JSON to Java object
-        Game request_game = response.payloadJsonAs(Game.class);
-
-        System.out.print(request_game.deck.size());
+        // Game request_game = response.payloadJsonAs(Game.class);
 
 
         assertThat(response.payload, containsString("deck"));
-        // assertThat(response.payload, )
+        // assertEquals(request_game.deck.size(), 52);
+    }
+
+
+    @Test
+    public void testPlayerHit() {
+
+        Game game = new Game();
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/hit"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        assertThat(response.payload, containsString("deck"));
     }
 
 
