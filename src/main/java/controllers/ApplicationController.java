@@ -18,7 +18,7 @@ package controllers;
 
 import ninja.Result;
 import ninja.Results;
-
+import models.Game;
 import com.google.inject.Singleton;
 
 
@@ -44,5 +44,15 @@ public class ApplicationController {
 
         public String content;
         
+    }
+
+
+    /* Get new game */
+    public Result newGame() {
+        int start_chips = 100;
+        Game game = new Game();
+        game.startGame(start_chips);
+
+        return Results.json().render(game);
     }
 }

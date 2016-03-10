@@ -30,6 +30,7 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
     
     String URL_INDEX = "/";
     String URL_HELLO_WORLD_JSON = "/hello_world.json";
+    String URL_BLACKJACK = "/blackjack";
     
     @Test
     public void testGetIndex() {
@@ -57,6 +58,20 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
         assertThat(simplePojo.content, CoreMatchers.equalTo("Hello World! Hello Json!"));
 
     
+    }
+
+
+    /* Aces Up controller tests */
+
+
+    @Test
+    public void testNewGameGet() {
+
+        Response response = makeRequest(
+            Request.GET().url(
+                testServerUrl().path("/new_game")));
+
+        assertThat(response.payload, containsString("deck"));
     }
 
 }
