@@ -7,8 +7,8 @@ angular.module('AcesUp').controller('AcesUpController', function($scope, $http, 
     /* --- On page load --- */
 
     // Get initial game state
-    $http.get('').then(function(result){
-
+    $http.get('/blackjack').then(function(result){
+        console.log(result);
     });
 
     /* --- Actions --- */
