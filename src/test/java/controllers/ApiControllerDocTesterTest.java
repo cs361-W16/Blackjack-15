@@ -38,8 +38,7 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
                 Request.GET().url(
                         testServerUrl().path(URL_INDEX)));
 
-        assertThat(response.payload, containsString("Hello World!"));
-        assertThat(response.payload, containsString("BAM!"));
+        assertThat(response.payload, containsString("ng-app=\"Blackjack\""));
 
 
     }
