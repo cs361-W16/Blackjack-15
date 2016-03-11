@@ -3,12 +3,13 @@ package models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.io.Serializable;
 
-public class Game {
+public class Game implements Serializable {
     /* Attributes */
     public java.util.List<Card> deck = new ArrayList<>();
-    public User player = new User();
-    public User dealer = new User();
+    public User player;
+    public User dealer;
     private int current_bet;
     private int round_winner = 0;
     private int bet_factor = 2;
@@ -16,7 +17,8 @@ public class Game {
 
     /* Default constructor deals to only one player */
     public Game() {
-
+        player = new User();
+        dealer = new User();
     }
 
 
