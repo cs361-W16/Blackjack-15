@@ -1,4 +1,4 @@
-angular.module('AcesUp').controller('AcesUpController', function($scope, $http, $interval){
+angular.module('Blackjack').controller('BlackjackController', function($scope, $http, $interval){
     // Debugging
     window.$scope = $scope;
 
