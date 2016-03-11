@@ -13,6 +13,7 @@ public class Game {
     private int current_bet;
     private int round_winner = 0;
     private int bet_factor = 2;
+    public boolean split_hand = false;
 
 
     /* Default constructor deals to only one player */
@@ -112,15 +113,22 @@ public class Game {
     public int determineWinner() {
         int player_hand_value = player.fetchHandValue();
         int dealer_hand_value = dealer.fetchHandValue();
+        int playerSplit_hand_value;
+        if (split_hand) {
+            playerSplit_hand_value = playerSplit.fetchHandValue();
+        }
+        else {
+            playerSplit_hand_value = 0;
+        }
 
         /* Player wins */
-        if (dealer_hand_value > 21 || player_hand_value > dealer_hand_value) {
+        if (dealer_hand_value > 21 || player_hand_value > dealer_hand_value || playerSplit_hand_value > dealer_hand_value) {
             round_winner = 1;
             player.addMoney(current_bet * bet_factor);
             return 1;
         }
         /* Dealer wins */
-        else if (player_hand_value < dealer_hand_value) {
+        else if (player_hand_value < dealer_hand_value && playerSplit_hand_value < dealer_hand_value) {
             round_winner = 0;
             return 0;
         }
@@ -139,6 +147,7 @@ public class Game {
             player.removeHand(1);
             hit(player);
             hit(playerSplit);
+            split_hand = true;
         }
     }
 
