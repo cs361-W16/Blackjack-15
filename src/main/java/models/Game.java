@@ -8,6 +8,7 @@ public class Game {
     /* Attributes */
     public java.util.List<Card> deck = new ArrayList<>();
     public User player = new User();
+    public User playerSplit = new User();
     public User dealer = new User();
     private int current_bet;
     private int round_winner = 0;
@@ -129,4 +130,28 @@ public class Game {
             return 2;
         }
     }
+
+
+    /* Splits the players hand. If both cards are equal in value, takes the second one from the player to make a new hand and then gives the old hand and new hand another card */
+    public void Split() {
+        if ( player.getCard(0).value == player.getCard(1).value ) {
+            playerSplit.pushHand( player.getCard(1) );
+            player.removeHand(1);
+            hit(player);
+            hit(playerSplit);
+        }
+    }
+
+
+    public int doubleDown( ) {
+        if (player.subtractMoney(current_bet) == 1) {
+            current_bet = current_bet * 2;
+
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
 }

@@ -16,6 +16,11 @@ public class User {
 
 	}
 
+	public Card getCard(int i) {
+
+		return hand.get(i);
+	}
+
 
 	/* Returns the last card in the hand */
 	public Card peekHand() {
@@ -27,6 +32,8 @@ public class User {
 	public void pushHand(Card new_card) {
 		hand.add(new_card);
 	}
+
+	public void removeHand(int i) {hand.remove(i);}
 
 
 	/* Returns number of cards in hand */
