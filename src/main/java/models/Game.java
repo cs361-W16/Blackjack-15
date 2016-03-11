@@ -15,6 +15,7 @@ public class Game implements Serializable {
     public int bet_factor = 2;
 
 
+
     /* Default constructor deals to only one player */
     public Game() {
         player = new User();
@@ -113,15 +114,22 @@ public class Game implements Serializable {
     public int determineWinner() {
         int player_hand_value = player.fetchHandValue();
         int dealer_hand_value = dealer.fetchHandValue();
+        int playerSplit_hand_value;
+        if (split_hand) {
+            playerSplit_hand_value = playerSplit.fetchHandValue();
+        }
+        else {
+            playerSplit_hand_value = 0;
+        }
 
         /* Player wins */
-        if (dealer_hand_value > 21 || player_hand_value > dealer_hand_value) {
+        if (dealer_hand_value > 21 || player_hand_value > dealer_hand_value || playerSplit_hand_value > dealer_hand_value) {
             round_winner = 1;
             player.addMoney(current_bet * bet_factor);
             return 1;
         }
         /* Dealer wins */
-        else if (player_hand_value < dealer_hand_value) {
+        else if (player_hand_value < dealer_hand_value && playerSplit_hand_value < dealer_hand_value) {
             round_winner = 0;
             return 0;
         }
@@ -131,4 +139,29 @@ public class Game implements Serializable {
             return 2;
         }
     }
+
+
+    /* Splits the players hand. If both cards are equal in value, takes the second one from the player to make a new hand and then gives the old hand and new hand another card */
+    public void Split() {
+        if ( player.getCard(0).value == player.getCard(1).value ) {
+            playerSplit.pushHand( player.getCard(1) );
+            player.removeHand(1);
+            hit(player);
+            hit(playerSplit);
+            split_hand = true;
+        }
+    }
+
+
+    public int doubleDown( ) {
+        if (player.subtractMoney(current_bet) == 1) {
+            current_bet = current_bet * 2;
+
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
 }
