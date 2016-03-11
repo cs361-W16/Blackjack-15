@@ -213,10 +213,30 @@ public class GameTestCase {
         assertEquals(2, g.determineWinner());
     }
 
+    @Test
+    public void testSplitHand() {
+        Game g = new Game();
+        g.buildDeck();
+        g.shuffle();
+
+        g.player.pushHand(new Card(10, Suit.clubs));
+        g.player.pushHand(new Card(10, Suit.diamonds));
+
+        g.Split();
+
+        assertEquals( g.player.getCard(0).value, g.playerSplit.getCard(0).value );
+    }
+
+    @Test
+    public void testDoubleDown() {
+        int start_chips = 100;
+        Game g = new Game();
+        g.startGame(start_chips);
+
+        g.doubleDown();
+        assertEquals(4, g.fetchCurrentBet() );
+    }
 
 
-
-
-    
 
 }
