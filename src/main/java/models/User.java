@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 	/* Attributes */
-	private java.util.List<Card> hand = new ArrayList<>();
-	private int money;
+	public java.util.List<Card> hand = new ArrayList<>();
+	public int money;
 
 
 	/* Methods */

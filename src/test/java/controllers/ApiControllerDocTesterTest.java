@@ -22,11 +22,13 @@ import org.junit.Test;
 import ninja.NinjaDocTester;
 import org.doctester.testbrowser.Request;
 import org.doctester.testbrowser.Response;
+import ninja.Results;
 import org.hamcrest.CoreMatchers;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 
 import models.Game;
+import com.google.gson.Gson;
 
 public class ApiControllerDocTesterTest extends NinjaDocTester {
     
@@ -74,11 +76,8 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
                 testServerUrl().path("/new_game")));
 
         // Parse JSON to Java object
-        // Game request_game = response.payloadJsonAs(Game.class);
-
-
-        assertThat(response.payload, containsString("deck"));
-        // assertEquals(request_game.deck.size(), 52);
+        Game request_game = response.payloadJsonAs(Game.class);
+        assertEquals(48, request_game.deck.size());
     }
 
 
@@ -86,6 +85,7 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
     public void testPlayerHit() {
 
         Game game = new Game();
+        game.startGame(100);
 
         Response response = makeRequest(
             Request
@@ -93,7 +93,9 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
                 .contentTypeApplicationJson()
                 .payload(game));
 
-        assertThat(response.payload, containsString("deck"));
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+        assertEquals(3, request_game.player.fetchHandSize());
     }
 
 

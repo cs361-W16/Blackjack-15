@@ -10,9 +10,9 @@ public class Game implements Serializable {
     public java.util.List<Card> deck = new ArrayList<>();
     public User player;
     public User dealer;
-    private int current_bet;
-    private int round_winner = 0;
-    private int bet_factor = 2;
+    public int current_bet;
+    public int round_winner = 0;
+    public int bet_factor = 2;
 
 
     /* Default constructor deals to only one player */
