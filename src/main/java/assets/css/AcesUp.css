@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    padding-top: 16px;
+}
+
+.wrapper{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5;
+}
+
+#header{
+    width: 100%;
+    height: 96px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#board{
+    width: 720px;
+    height: 480px;
+    margin: 0 auto;
+
+    background-color: #FFF;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+.content-main {
+    width: 720px;
+    margin: 0 auto;
+    margin-top: 10px;
+
+    background-color: #FFF;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+#info{
+    width: 100%;
+    height: 72px;
+    color: #FFF;
+    background-color: #303F9F;
+}
+
+.info-item{
+    margin-top: 18px;
+    margin-left: 12px;
+}
+
+#columnWrapper{
+    width: 100%;
+    margin: 8px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.column{
+    width: 25%;
+}
+
+.card{
+    width: 100%;
+    display: block;
+}
+
+.offset{
+    margin-top: -180px !important;
+}
+
+.card-img{
+    width: 80%;
+    margin: 0 auto;
+}
+
+#dimmer{
+    background:#ff0000; /*alternatives: #ff1a1a #ff0000*/
+    opacity:0.5;
+    position:fixed; /* important to use fixed, not absolute */
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:9999; /* could remove, but it's fine */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* Animations
+.card.ng-enter{
+    -webkit-transition: opacity 0.2s ease-in;
+    -moz-transition: opacity 0.2s ease-in;
+    -o-transition: opacity 0.2s ease-in;
+    -ms-transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s ease-in;
+    opacity: 0;
+}
+.card.ng-enter.ng-enter-active {
+    opacity:1;
+}*/
