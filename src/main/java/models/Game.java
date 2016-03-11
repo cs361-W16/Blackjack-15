@@ -10,9 +10,11 @@ public class Game implements Serializable {
     public java.util.List<Card> deck = new ArrayList<>();
     public User player;
     public User dealer;
+    public User playerSplit;
     public int current_bet;
     public int round_winner = 0;
     public int bet_factor = 2;
+    public boolean split_hand = false;
 
 
 
@@ -20,6 +22,7 @@ public class Game implements Serializable {
     public Game() {
         player = new User();
         dealer = new User();
+        playerSplit = new User();
     }
 
 
