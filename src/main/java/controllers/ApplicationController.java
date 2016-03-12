@@ -68,4 +68,12 @@ public class ApplicationController {
 
         return Results.json().render(current_game);
     }
+
+
+    /* Dealer turn logic */
+    public Result dealerTurn(Context context, Game current_game) {
+        current_game.dealerTurn();
+
+        return Results.json().render(current_game);
+    }
 }

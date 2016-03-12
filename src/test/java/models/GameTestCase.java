@@ -224,7 +224,7 @@ public class GameTestCase {
 
         g.Split();
 
-        assertEquals( g.player.getCard(0).value, g.playerSplit.getCard(0).value );
+        assertEquals( g.player.fetchCard(0).value, g.playerSplit.fetchCard(0).value );
     }
 
     @Test

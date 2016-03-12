@@ -17,7 +17,7 @@ public class User implements Serializable {
 
 	}
 
-	public Card getCard(int i) {
+	public Card fetchCard(int i) {
 
 		return hand.get(i);
 	}

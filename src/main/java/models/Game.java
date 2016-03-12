@@ -12,7 +12,7 @@ public class Game implements Serializable {
     public User dealer;
     public User playerSplit;
     public int current_bet;
-    public int round_winner = 0;
+    public int round_winner = 3;
     public int bet_factor = 2;
     public boolean split_hand = false;
 
@@ -146,8 +146,8 @@ public class Game implements Serializable {
 
     /* Splits the players hand. If both cards are equal in value, takes the second one from the player to make a new hand and then gives the old hand and new hand another card */
     public void Split() {
-        if ( player.getCard(0).value == player.getCard(1).value ) {
-            playerSplit.pushHand( player.getCard(1) );
+        if ( player.fetchCard(0).value == player.fetchCard(1).value ) {
+            playerSplit.pushHand( player.fetchCard(1) );
             player.removeHand(1);
             hit(player);
             hit(playerSplit);

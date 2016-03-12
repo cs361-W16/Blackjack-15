@@ -24,7 +24,7 @@ import org.doctester.testbrowser.Request;
 import org.doctester.testbrowser.Response;
 import ninja.Results;
 import org.hamcrest.CoreMatchers;
-import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import models.Game;
@@ -82,7 +82,6 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
 
     @Test
     public void testPlayerHit() {
-
         Game game = new Game();
         game.startGame(100);
 
@@ -96,6 +95,36 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
         Game request_game = response.payloadJsonAs(Game.class);
         assertEquals(3, request_game.player.fetchHandSize());
     }
+
+
+    @Test
+    public void testDealerTurn() {
+        Game game = new Game();
+        game.startGame(100);
+
+        int dealer_hand_value = game.dealer.fetchHandValue();
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/dealer_turn"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+        
+        // Check that dealer hit or stayed
+        if (dealer_hand_value >= 17) {
+            assertEquals(2, game.dealer.fetchHandSize());
+        }
+        else {
+            assertThat(game.dealer.fetchHandSize(), not(2));
+        }
+
+    }
+
+
+    
 
 
     
