@@ -124,7 +124,76 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
     }
 
 
-    
+    @Test
+    public void testDetermineWinner() {
+        Game game = new Game();
+        game.startGame(100);
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/dealer_turn"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+      
+        assertThat(request_game.round_winner, not(3));
+
+    }
+
+
+    @Test
+    public void testRaiseBet() {
+        Game game = new Game();
+        game.startGame(100);
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/raise/20"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+        int current_bet = request_game.fetchCurrentBet();
+      
+        assertEquals(current_bet, 22);
+    }
+
+
+    @Test 
+    public void testDoubleDown() {
+        Game game = new Game();
+        game.startGame(100);
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/double_down"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        Game request_game = response.payloadJsonAs(Game.class);
+
+        assertEquals(4, request_game.fetchCurrentBet());
+    }
+
+
+    @Test 
+    public void testSplitHand() {
+        Game game = new Game();
+        game.startGame(100);
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/split"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        Game request_game = response.payloadJsonAs(Game.class);
+
+        assertEquals(true, request_game.split_hand);
+    }
 
 
     

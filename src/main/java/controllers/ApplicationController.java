@@ -21,6 +21,7 @@ import ninja.Results;
 import ninja.Context;
 import models.Game;
 import com.google.inject.Singleton;
+import ninja.params.PathParam;
 
 
 @Singleton
@@ -73,7 +74,35 @@ public class ApplicationController {
     /* Dealer turn logic */
     public Result dealerTurn(Context context, Game current_game) {
         current_game.dealerTurn();
+        current_game.determineWinner();
 
         return Results.json().render(current_game);
+    }
+
+
+    /* Raise the current bet */
+    public Result raiseBet(Context context, Game current_game, @PathParam("bet") int bet) {
+        current_game.raiseBet(bet);
+
+        return Results.json().render(current_game);
+
+    }
+
+
+    /* Double down */
+    public Result doubleDown(Context context, Game current_game) {
+        current_game.doubleDown();
+
+        return Results.json().render(current_game);
+
+    }
+
+
+    /* Split hand */
+    public Result splitHand(Context context, Game current_game) {
+        current_game.split();
+
+        return Results.json().render(current_game);
+
     }
 }

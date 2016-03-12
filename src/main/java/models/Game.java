@@ -145,7 +145,7 @@ public class Game implements Serializable {
 
 
     /* Splits the players hand. If both cards are equal in value, takes the second one from the player to make a new hand and then gives the old hand and new hand another card */
-    public void Split() {
+    public void split() {
         if ( player.fetchCard(0).value == player.fetchCard(1).value ) {
             playerSplit.pushHand( player.fetchCard(1) );
             player.removeHand(1);

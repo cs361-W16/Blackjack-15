@@ -222,7 +222,7 @@ public class GameTestCase {
         g.player.pushHand(new Card(10, Suit.clubs));
         g.player.pushHand(new Card(10, Suit.diamonds));
 
-        g.Split();
+        g.split();
 
         assertEquals( g.player.fetchCard(0).value, g.playerSplit.fetchCard(0).value );
     }
