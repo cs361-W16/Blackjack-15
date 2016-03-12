@@ -27,7 +27,7 @@ import org.hamcrest.CoreMatchers;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import models.Game;
+import models.*;
 import com.google.gson.Gson;
 
 public class ApiControllerDocTesterTest extends NinjaDocTester {
@@ -68,11 +68,10 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
 
 
     @Test
-    public void testNewGameGet() {
-
+    public void testNewGame() {
         Response response = makeRequest(
-            Request.GET().url(
-                testServerUrl().path("/new_game")));
+            Request
+                .POST().url(testServerUrl().path("/new_game/" + Integer.toString(100))));
 
         // Parse JSON to Java object
         Game request_game = response.payloadJsonAs(Game.class);
@@ -115,10 +114,10 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
         
         // Check that dealer hit or stayed
         if (dealer_hand_value >= 17) {
-            assertEquals(2, game.dealer.fetchHandSize());
+            assertEquals(2, request_game.dealer.fetchHandSize());
         }
         else {
-            assertThat(game.dealer.fetchHandSize(), not(2));
+            assertThat(request_game.dealer.fetchHandSize(), not(2));
         }
 
     }
@@ -183,6 +182,10 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
     public void testSplitHand() {
         Game game = new Game();
         game.startGame(100);
+
+        // Add matching value cards to the hand
+        game.player.hand.add(0, new Card(1, Suit.spades));
+        game.player.hand.add(1, new Card(1, Suit.hearts));
 
         Response response = makeRequest(
             Request
