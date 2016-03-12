@@ -184,7 +184,7 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
         game.startGame(100);
 
         // Add matching value cards to the hand
-        game.player.hand.add(0, new Card(1, Suit.spades, 0));
+        game.player.hand.add(0, new Card(1, Suit.spades, 1));
         game.player.hand.add(1, new Card(1, Suit.hearts, 1));
 
         Response response = makeRequest(
