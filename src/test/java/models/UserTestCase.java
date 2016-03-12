@@ -47,7 +47,7 @@ public class UserTestCase {
 
 
     @Test
-    public void testGetHandValue() {
+    public void testFetchHandValue() {
         User user = new User();
         user.pushHand(new Card(3, Suit.spades));
         user.pushHand(new Card(4, Suit.hearts));

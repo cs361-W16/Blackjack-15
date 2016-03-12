@@ -22,14 +22,19 @@ import org.junit.Test;
 import ninja.NinjaDocTester;
 import org.doctester.testbrowser.Request;
 import org.doctester.testbrowser.Response;
+import ninja.Results;
 import org.hamcrest.CoreMatchers;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
+import models.Game;
+import com.google.gson.Gson;
 
 public class ApiControllerDocTesterTest extends NinjaDocTester {
     
     String URL_INDEX = "/";
     String URL_HELLO_WORLD_JSON = "/hello_world.json";
+    String URL_BLACKJACK = "/blackjack";
     
     @Test
     public void testGetIndex() {
@@ -57,5 +62,140 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
 
     
     }
+
+
+    /* Aces Up controller tests */
+
+
+    @Test
+    public void testNewGameGet() {
+
+        Response response = makeRequest(
+            Request.GET().url(
+                testServerUrl().path("/new_game")));
+
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+        assertEquals(48, request_game.deck.size());
+    }
+
+
+    @Test
+    public void testPlayerHit() {
+        Game game = new Game();
+        game.startGame(100);
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/hit"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+        assertEquals(3, request_game.player.fetchHandSize());
+    }
+
+
+    @Test
+    public void testDealerTurn() {
+        Game game = new Game();
+        game.startGame(100);
+
+        int dealer_hand_value = game.dealer.fetchHandValue();
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/dealer_turn"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+        
+        // Check that dealer hit or stayed
+        if (dealer_hand_value >= 17) {
+            assertEquals(2, game.dealer.fetchHandSize());
+        }
+        else {
+            assertThat(game.dealer.fetchHandSize(), not(2));
+        }
+
+    }
+
+
+    @Test
+    public void testDetermineWinner() {
+        Game game = new Game();
+        game.startGame(100);
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/dealer_turn"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+      
+        assertThat(request_game.round_winner, not(3));
+
+    }
+
+
+    @Test
+    public void testRaiseBet() {
+        Game game = new Game();
+        game.startGame(100);
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/raise/20"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+        int current_bet = request_game.fetchCurrentBet();
+      
+        assertEquals(current_bet, 22);
+    }
+
+
+    @Test 
+    public void testDoubleDown() {
+        Game game = new Game();
+        game.startGame(100);
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/double_down"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        Game request_game = response.payloadJsonAs(Game.class);
+
+        assertEquals(4, request_game.fetchCurrentBet());
+    }
+
+
+    @Test 
+    public void testSplitHand() {
+        Game game = new Game();
+        game.startGame(100);
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/split"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        Game request_game = response.payloadJsonAs(Game.class);
+
+        assertEquals(true, request_game.split_hand);
+    }
+
+
+    
 
 }

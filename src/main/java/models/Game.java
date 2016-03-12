@@ -3,22 +3,26 @@ package models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.io.Serializable;
 
-public class Game {
+public class Game implements Serializable {
     /* Attributes */
     public java.util.List<Card> deck = new ArrayList<>();
-    public User player = new User();
-    public User playerSplit = new User();
-    public User dealer = new User();
-    private int current_bet;
-    private int round_winner = 0;
-    private int bet_factor = 2;
+    public User player;
+    public User dealer;
+    public User playerSplit;
+    public int current_bet;
+    public int round_winner = 3;
+    public int bet_factor = 2;
     public boolean split_hand = false;
+
 
 
     /* Default constructor deals to only one player */
     public Game() {
-
+        player = new User();
+        dealer = new User();
+        playerSplit = new User();
     }
 
 
@@ -141,9 +145,9 @@ public class Game {
 
 
     /* Splits the players hand. If both cards are equal in value, takes the second one from the player to make a new hand and then gives the old hand and new hand another card */
-    public void Split() {
-        if ( player.getCard(0).value == player.getCard(1).value ) {
-            playerSplit.pushHand( player.getCard(1) );
+    public void split() {
+        if ( player.fetchCard(0).value == player.fetchCard(1).value ) {
+            playerSplit.pushHand( player.fetchCard(1) );
             player.removeHand(1);
             hit(player);
             hit(playerSplit);

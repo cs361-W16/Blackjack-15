@@ -18,8 +18,10 @@ package controllers;
 
 import ninja.Result;
 import ninja.Results;
-
+import ninja.Context;
+import models.Game;
 import com.google.inject.Singleton;
+import ninja.params.PathParam;
 
 
 @Singleton
@@ -44,5 +46,63 @@ public class ApplicationController {
 
         public String content;
         
+    }
+
+    /* Blackjack controllers */
+
+
+    /* Get new game */
+    public Result newGame() {
+        int start_chips = 100;
+        Game game = new Game();
+        game.startGame(start_chips);
+
+        // System.out.print(Results.json().render(game));
+
+        return Results.json().render(game);
+    }
+
+
+    /* Give the player another card */
+    public Result hit(Context context, Game current_game) {
+        current_game.hit(current_game.player);
+
+        return Results.json().render(current_game);
+    }
+
+
+    /* Dealer turn logic */
+    public Result dealerTurn(Context context, Game current_game) {
+        current_game.dealerTurn();
+        current_game.determineWinner();
+
+        return Results.json().render(current_game);
+    }
+
+
+    /* Raise the current bet */
+    public Result raiseBet(Context context, Game current_game, @PathParam("bet") int bet) {
+        current_game.raiseBet(bet);
+
+        return Results.json().render(current_game);
+
+    }
+
+
+    /* Double down */
+    public Result doubleDown(Context context, Game current_game) {
+        current_game.doubleDown();
+
+        return Results.json().render(current_game);
+
+    }
+
+
+    /* Split hand */
+    public Result splitHand(Context context, Game current_game) {
+        current_game.split();
+
+        return Results.json().render(current_game);
+
     }
 }

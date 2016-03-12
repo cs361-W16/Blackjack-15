@@ -3,11 +3,12 @@ package models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
 	/* Attributes */
-	private java.util.List<Card> hand = new ArrayList<>();
-	private int money;
+	public java.util.List<Card> hand = new ArrayList<>();
+	public int money;
 
 
 	/* Methods */
@@ -16,7 +17,7 @@ public class User {
 
 	}
 
-	public Card getCard(int i) {
+	public Card fetchCard(int i) {
 
 		return hand.get(i);
 	}
