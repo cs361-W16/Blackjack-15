@@ -29,14 +29,24 @@ public class Game implements Serializable {
     /* Build a standard deck */
     public void buildDeck() {
         /* Add 14 cards per suit */
+        int j;
         for(int i = 2; i < 15; i++){
-            deck.add(new Card(i, Suit.clubs));
-            deck.add(new Card(i, Suit.hearts));
-            deck.add(new Card(i, Suit.diamonds));
-            deck.add(new Card(i, Suit.spades));
+            if (i > 10) {
+                j = 10;
+            }
+            else if (i == 14) {
+                j = 11;
+            }
+            else {
+                j = i;
+            }
+            deck.add(new Card(j, Suit.clubs, i));
+            deck.add(new Card(j, Suit.hearts, i));
+            deck.add(new Card(j, Suit.diamonds, i));
+            deck.add(new Card(j, Suit.spades, i));
 
-            shuffle();
         }
+        shuffle();
     }
 
 

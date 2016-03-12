@@ -139,12 +139,12 @@ public class GameTestCase {
         Game g = new Game();
 
         // Give the user a card
-        g.player.pushHand(new Card(2, Suit.spades));
+        g.player.pushHand(new Card(2, Suit.spades, 2));
 
         // Give the dealer over 21 
-        g.dealer.pushHand(new Card(10, Suit.spades));
-        g.dealer.pushHand(new Card(10, Suit.hearts));
-        g.dealer.pushHand(new Card(2, Suit.hearts));
+        g.dealer.pushHand(new Card(10, Suit.spades, 10));
+        g.dealer.pushHand(new Card(10, Suit.hearts, 10));
+        g.dealer.pushHand(new Card(2, Suit.hearts, 2));
 
         assertEquals(1, g.determineWinner());
     }
@@ -157,11 +157,11 @@ public class GameTestCase {
         Game g = new Game();
 
         /* Set player's hand to be greater than dealer */
-        g.player.pushHand(new Card(10, Suit.clubs));
-        g.player.pushHand(new Card(10, Suit.spades));
+        g.player.pushHand(new Card(10, Suit.clubs, 10));
+        g.player.pushHand(new Card(10, Suit.spades, 10));
 
-        g.dealer.pushHand(new Card(10, Suit.hearts));
-        g.dealer.pushHand(new Card(7, Suit.hearts));
+        g.dealer.pushHand(new Card(10, Suit.hearts, 10));
+        g.dealer.pushHand(new Card(7, Suit.hearts, 10));
 
         assertEquals(1, g.determineWinner());
     }
@@ -176,11 +176,11 @@ public class GameTestCase {
         g.raiseBet(20);
 
         /* Set player's hand to be greater than dealer */
-        g.player.pushHand(new Card(10, Suit.clubs));
-        g.player.pushHand(new Card(10, Suit.spades));
+        g.player.pushHand(new Card(10, Suit.clubs, 10));
+        g.player.pushHand(new Card(10, Suit.spades, 10));
 
-        g.dealer.pushHand(new Card(10, Suit.hearts));
-        g.dealer.pushHand(new Card(7, Suit.hearts));
+        g.dealer.pushHand(new Card(10, Suit.hearts, 10));
+        g.dealer.pushHand(new Card(7, Suit.hearts, 7));
 
         /* Determine that player's money is increased by correct amount */
         g.determineWinner();
@@ -195,11 +195,11 @@ public class GameTestCase {
         Game g = new Game();
 
         /* Set player's hand to be greater than dealer */
-        g.player.pushHand(new Card(2, Suit.clubs));
-        g.player.pushHand(new Card(3, Suit.spades));
+        g.player.pushHand(new Card(2, Suit.clubs, 2));
+        g.player.pushHand(new Card(3, Suit.spades, 3));
 
-        g.dealer.pushHand(new Card(10, Suit.hearts));
-        g.dealer.pushHand(new Card(7, Suit.hearts));
+        g.dealer.pushHand(new Card(10, Suit.hearts, 10));
+        g.dealer.pushHand(new Card(7, Suit.hearts, 7));
 
         assertEquals(0, g.determineWinner());
     }
@@ -212,11 +212,11 @@ public class GameTestCase {
         Game g = new Game();
 
         /* Set player's hand to be greater than dealer */
-        g.player.pushHand(new Card(10, Suit.clubs));
-        g.player.pushHand(new Card(10, Suit.spades));
+        g.player.pushHand(new Card(10, Suit.clubs, 10));
+        g.player.pushHand(new Card(10, Suit.spades, 10));
 
-        g.dealer.pushHand(new Card(10, Suit.hearts));
-        g.dealer.pushHand(new Card(10, Suit.diamonds));
+        g.dealer.pushHand(new Card(10, Suit.hearts, 10));
+        g.dealer.pushHand(new Card(10, Suit.diamonds, 10));
 
         assertEquals(2, g.determineWinner());
     }
@@ -227,8 +227,8 @@ public class GameTestCase {
         g.buildDeck();
         g.shuffle();
 
-        g.player.pushHand(new Card(10, Suit.clubs));
-        g.player.pushHand(new Card(10, Suit.diamonds));
+        g.player.pushHand(new Card(10, Suit.clubs, 10));
+        g.player.pushHand(new Card(10, Suit.diamonds, 10));
 
         g.split();
 

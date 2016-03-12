@@ -35,13 +35,13 @@
                         <div id="dealerRow">
                             <h1>Dealer</h1>
                             <div class="card-container">
-                                <img ng-repeat="card in gameState.dealer.hand" ng-src="/assets/img/{{card.value}}_of_{{card.suit}}.png" class="card">
+                                <img ng-repeat="card in gameState.dealer.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
                             </div>
                         </div>
                         <div id="playerRow">
                             <h1>You</h1>
                             <div >
-                                <img ng-repeat="card in gameState.player.hand" ng-src="/assets/img/{{card.value}}_of_{{card.suit}}.png" class="card">
+                                <img ng-repeat="card in gameState.player.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
                             </div>
                         </div>
                     </div>

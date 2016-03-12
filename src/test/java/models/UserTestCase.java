@@ -8,7 +8,7 @@ public class UserTestCase {
 
     @Test
     public void testPushHand() {
-        Card card = new Card(3, Suit.clubs);
+        Card card = new Card(3, Suit.clubs, 3);
         User user = new User();
 
         user.pushHand(card);
@@ -49,8 +49,8 @@ public class UserTestCase {
     @Test
     public void testFetchHandValue() {
         User user = new User();
-        user.pushHand(new Card(3, Suit.spades));
-        user.pushHand(new Card(4, Suit.hearts));
+        user.pushHand(new Card(3, Suit.spades, 3));
+        user.pushHand(new Card(4, Suit.hearts, 4));
 
         assertEquals(7, user.fetchHandValue());
     }

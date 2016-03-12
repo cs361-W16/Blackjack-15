@@ -9,11 +9,13 @@ import java.io.Serializable;
 public class Card implements Serializable {
     public final int value;
     public final Suit suit;
+    public final int type;
 
     @JsonCreator
-    public Card(@JsonProperty("value") int value, @JsonProperty("suit") Suit suit) {
+    public Card(@JsonProperty("value") int value, @JsonProperty("suit") Suit suit, @JsonProperty("type") int type) {
         this.value = value;
         this.suit = suit;
+        this.type=type;
 
     }
 
