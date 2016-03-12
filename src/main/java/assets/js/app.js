@@ -1,6 +1,6 @@
 angular.module('Blackjack', ['ngMaterial', 'ngAnimate'])
     .config(function($mdThemingProvider){
         $mdThemingProvider.theme('default')
-            .primaryPalette('indigo')
+            .primaryPalette('green')
             .accentPalette('red');
     });
