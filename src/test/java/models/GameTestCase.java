@@ -56,11 +56,11 @@ public class GameTestCase {
             Card shuffledCard = shuffled.deck.get(i);
 
             Suit unshuffledSuit = unshuffledCard.fetchSuit();
-            int unshuffledVal = unshuffledCard.fetchValue();
+            int unshuffledType = unshuffledCard.fetchType();
             Suit shuffledSuit = shuffledCard.fetchSuit();
-            int shuffledVal = shuffledCard.fetchValue();
+            int shuffledType = shuffledCard.fetchType();
 
-            if(unshuffledSuit == shuffledSuit && unshuffledVal == shuffledVal) {
+            if(unshuffledSuit == shuffledSuit && unshuffledType == shuffledType) {
                 matches++;
             }
         }
