@@ -65,6 +65,14 @@ public class GameTestCase {
             }
         }
 
+        Card card1 = shuffled.deck.get(0);
+        Card card2 = shuffled.deck.get(1);
+
+        System.out.print(card1.fetchValue());
+        System.out.print(card2.fetchValue());
+
+        assertTrue(card1.fetchValue() != card2.fetchValue());
+
         // Ensure that shuffled deck is at least 85% unique
         assertTrue((matches / size) <= 0.15);
     }
@@ -236,6 +244,7 @@ public class GameTestCase {
         g.doubleDown();
         assertEquals(4, g.fetchCurrentBet() );
     }
+
 
 
 

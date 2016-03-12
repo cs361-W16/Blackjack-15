@@ -52,12 +52,10 @@ public class ApplicationController {
 
 
     /* Get new game */
-    public Result newGame() {
-        int start_chips = 100;
+    public Result newGame(Context context, @PathParam("start_chips") int start_chips) {
+        // int start_chips = 100;
         Game game = new Game();
         game.startGame(start_chips);
-
-        // System.out.print(Results.json().render(game));
 
         return Results.json().render(game);
     }

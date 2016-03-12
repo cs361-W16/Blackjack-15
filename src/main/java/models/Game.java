@@ -44,7 +44,9 @@ public class Game implements Serializable {
             deck.add(new Card(j, Suit.hearts, i));
             deck.add(new Card(j, Suit.diamonds, i));
             deck.add(new Card(j, Suit.spades, i));
+
         }
+        shuffle();
     }
 
 
@@ -116,9 +118,6 @@ public class Game implements Serializable {
         while (dealer_hand_value <= dealer_limit) {
             hit(dealer);
             dealer_hand_value = dealer.fetchHandValue();
-
-            // Debugging
-            System.out.print("Dealer hand: " + dealer_hand_value);
         }
     }
 
