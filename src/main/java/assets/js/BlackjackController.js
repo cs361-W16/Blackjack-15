@@ -7,8 +7,8 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
     /* --- On page load --- */
 
     // Get initial game state
-    $http.get('/blackjack').then(function(result){
-        console.log(result);
+    $http.get('/new_game').then(function(result){
+        $scope.gameState = result.data;
     });
 
     /* --- Actions --- */
