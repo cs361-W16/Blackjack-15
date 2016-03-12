@@ -26,7 +26,7 @@
                                         Money: $<!--wat-->{{gameState.player.money}} - Bet: $<!--wat-->{{gameState.current_bet}} - Pot Value: wat
                                     </span>
                             <span flex></span>
-                            <md-button class="md-raised md-accent" ng-click="resetGame()">
+                            <md-button ng-click="newGame()" class="md-raised md-accent">
                                 NEW GAME
                             </md-button>
                         </div>
@@ -48,10 +48,10 @@
                 </div>
 
                 <div class="user-actions">
-                    <md-button class="md-primary md-raised">Hit</md-button>
-                    <md-button class="md-primary md-raised">Stay</md-button>
-                    <md-button class="md-primary md-raised">Double Down</md-button>
-                    <md-button class="md-primary md-raised">Split</md-button>
+                    <md-button ng-click="hit()" class="md-primary md-raised">Hit</md-button>
+                    <md-button ng-click="dealerTurn()" class="md-primary md-raised">Stay</md-button>
+                    <md-button ng-click="doubleDown()" class="md-primary md-raised">Double Down</md-button>
+                    <md-button ng-click="split()" class="md-primary md-raised">Split</md-button>
                 </div>
             </div>
         </div>
