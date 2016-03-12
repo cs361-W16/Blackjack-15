@@ -60,7 +60,6 @@ public class ApplicationController {
         return Results.json().render(game);
     }
 
-
     /* Give the player another card */
     public Result hit(Context context, Game current_game) {
         current_game.hit(current_game.player);

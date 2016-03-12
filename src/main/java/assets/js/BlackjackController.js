@@ -43,4 +43,11 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
             });
         };
 
+    /* for "New Game" button */
+    $scope.newGame = function() {
+            $http.post('/new_game/100').then(function(result){
+               $scope.gameState = result.data;
+           });
+        }
+
 });
