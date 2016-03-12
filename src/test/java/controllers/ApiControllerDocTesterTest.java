@@ -80,7 +80,7 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
 
 
     @Test
-    public void testPlayerHit() {
+    public void testPlayerHitValid() {
         Game game = new Game();
         game.startGame(100);
 
@@ -93,6 +93,27 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
         // Parse JSON to Java object
         Game request_game = response.payloadJsonAs(Game.class);
         assertEquals(3, request_game.player.fetchHandSize());
+    }
+
+
+    @Test
+    public void testPlayerHitInvalid() {
+        Game game = new Game();
+        game.startGame(100);
+
+        // Give the user cards worth over 21
+        game.player.pushHand(new Card(10, Suit.hearts, 10));
+        game.player.pushHand(new Card(10, Suit.spades, 10));
+
+        Response response = makeRequest(
+            Request
+                .POST().url(testServerUrl().path("/hit"))
+                .contentTypeApplicationJson()
+                .payload(game));
+
+        // Parse JSON to Java object
+        Game request_game = response.payloadJsonAs(Game.class);
+        assertEquals(4, request_game.player.fetchHandSize());
     }
 
 

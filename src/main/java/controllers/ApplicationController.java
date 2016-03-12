@@ -60,9 +60,14 @@ public class ApplicationController {
         return Results.json().render(game);
     }
 
-    /* Give the player another card */
+    /* Give the player another card if hand value is under 21 */
     public Result hit(Context context, Game current_game) {
-        current_game.hit(current_game.player);
+        if (current_game.player.fetchHandValue() < 21) {
+            current_game.hit(current_game.player);
+
+            // Check if player busted 
+            current_game.checkPlayerBust();
+        }
 
         return Results.json().render(current_game);
     }
