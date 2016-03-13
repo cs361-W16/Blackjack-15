@@ -89,6 +89,7 @@ public class GameTestCase {
 
         assertEquals(0, g.raiseBet(20));
     }
+    
 
 
     @Test
