@@ -68,7 +68,7 @@
         </div>
 
         <!-- On error -->
-        <div id="WOWDOGE" ng-show="playerLost">
+        <div id="WOWDOGE" ng-if="playerLost">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <h1>You lose!</h1>
                 <md-button ng-click="newGame()" class="md-raised md-primary">

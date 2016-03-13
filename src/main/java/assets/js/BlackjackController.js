@@ -54,7 +54,6 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
 
             if($scope.gameState.player.money == 0){
                 $scope.playerLost = true;
-                $scope.$apply();
             }
         });
     };
@@ -96,7 +95,6 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
             $scope.gameState = result.data;
             clearMessage();
             $scope.playerLost = false;
-            $scope.$apply();
             if ($scope.showLastCard == true) $scope.showLastCard = false;
         });
     };
