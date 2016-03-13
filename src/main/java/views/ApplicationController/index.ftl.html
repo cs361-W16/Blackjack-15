@@ -43,7 +43,7 @@
                             <div class="card-container">
                                 <div>
                                     <p>{{userMessage}}</p>
-                                    <md-button ng-if="userMessage.length > 0" ng-click="newGame()">Continue</md-button>
+                                    <md-button ng-if="userMessage.length > 0 && $scope.gameState.round_winner != 2" ng-click="newRound()">Continue</md-button>
                                 </div>
                                 <img ng-repeat="card in gameState.player.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
                             </div>
