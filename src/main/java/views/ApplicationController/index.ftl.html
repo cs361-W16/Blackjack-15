@@ -35,11 +35,11 @@
                         <div id="dealerRow">
                             <h1>Dealer</h1>
                             <div class="card-container">
-                                <img ng-repeat="card in gameState.dealer.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
+                                <img ng-repeat="card in gameState.dealer.hand" ng-src="{{ (!$last || ($last && showLastCard)) && ('/assets/img/' + card.type + '_of_' + card.suit + '.png') || ('assets/img/doge.jpg')}}" class="card">
                             </div>
                         </div>
                         <div id="playerRow">
-                            <h1>You</h1>
+                            <h1 style="display: inline;">You</h1><span>Total: {{playerTotal}}</span><span ng-show="playerSplitTotal > 0">Split Total: {{playerSplitTotal}}</span>
                             <div class="card-container">
                                 <div>
                                     <p>{{userMessage}}</p>

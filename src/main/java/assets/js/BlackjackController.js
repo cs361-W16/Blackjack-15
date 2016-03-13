@@ -5,12 +5,23 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
     $scope.invalidMove = false;
     $scope.userMessage = '';
     $scope.gameState = {};
+    $scope.showLastCard = false;
+
+    $scope.playerTotal = 0;
+    $scope.playerSplitTotal = 0;
 
     /* --- On page load --- */
 
     // Get initial game state
     $http.post('/new_game/100').then(function(result) {
         $scope.gameState = result.data;
+        $scope.playerTotal = calculateTotalValue($scope.gameState.player.hand);
+
+        $scope.$watch('gameState.player.hand', function(newHand, oldHand){
+            if(newHand.length != oldHand.length){
+                $scope.playerTotal = calculateTotalValue(newHand);
+            }
+        });
     });
 
     /* --- Actions --- */
@@ -27,21 +38,10 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
         });
     };
 
-   $scope.hitSplit = function() {
-        $http.post('/hit_split', $scope.gameState).then(function(result) {
-            $scope.gameState = result.data;
-
-            // Check if player lost from bust
-            if ($scope.gameState.round_winner == 0) {
-                // Tell the player they lost
-                alertUser("You lost - because you bust!");
-            }
-        });
-    };
-
     $scope.dealerTurn = function() {
         $http.post('/dealer_turn', $scope.gameState).then(function(result) {
             $scope.gameState = result.data;
+            $scope.showLastCard = true;
 
             // Check if the player lost
             if ($scope.gameState.round_winner == 0) {
@@ -63,6 +63,25 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
     $scope.split = function() {
         $http.post('/split', $scope.gameState).then(function(result) {
             $scope.gameState = result.data;
+            $scope.playerSplitTotal = calculateTotalValue($scope.gameState.playerSplit.hand);
+
+            $scope.$watch('gameState.playerSplit.hand', function(newHand, oldHand){
+                if(newHand.length != oldHand.length){
+                    $scope.playerSplitTotal = calculateTotalValue(newHand);
+                }
+            });
+        });
+    };
+
+    $scope.hitSplit = function() {
+        $http.post('/hit_split', $scope.gameState).then(function(result) {
+            $scope.gameState = result.data;
+
+            // Check if player lost from bust
+            if ($scope.gameState.round_winner == 0) {
+                // Tell the player they lost
+                alertUser("You lost - because you bust!");
+            }
         });
     };
 
@@ -79,20 +98,31 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
             $scope.gameState = result.data;
         });
         clearMessage();
+        if ($scope.showLastCard == true) $scope.showLastCard = false;
     };
 
     $scope.raise = function() {
         $http.post('raise/1', $scope.gameState).then(function(result) {
             $scope.gameState = result.data;
         });
-    }
+    };
 
     /* --- Helper functions --- */
+
     function alertUser(str){
         $scope.userMessage = str;
     }
 
     function clearMessage(){
         $scope.userMessage = '';
+    }
+
+    function calculateTotalValue(hand){
+        var sum = 0;
+        for(var i = 0; i < hand.length; i++){
+            sum += hand[i].value;
+        }
+
+        return sum;
     }
 });
