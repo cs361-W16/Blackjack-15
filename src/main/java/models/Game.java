@@ -15,6 +15,7 @@ public class Game implements Serializable {
     public int round_winner = 3;
     public int bet_factor = 2;
     public boolean split_hand = false;
+    public boolean doubleBet = false;
 
 
 
@@ -174,10 +175,14 @@ public class Game implements Serializable {
 
 
     public int doubleDown( ) {
-        if (player.subtractMoney(current_bet) == 1) {
-            current_bet = current_bet * 2;
+        if (!doubleBet) {
+            if (player.subtractMoney(current_bet) == 1) {
+                current_bet = current_bet * 2;
+                doubleBet = true;
 
-            return 1;
+                return 1;
+            }
+            return 0;
         }
         else {
             return 0;
