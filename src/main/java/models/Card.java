@@ -7,9 +7,9 @@ import java.io.Serializable;
 
 
 public class Card implements Serializable {
-    public final int value;
+    public int value;
     public final Suit suit;
-    public final int type;
+    public int type;
 
     @JsonCreator
     public Card(@JsonProperty("value") int value, @JsonProperty("suit") Suit suit, @JsonProperty("type") int type) {

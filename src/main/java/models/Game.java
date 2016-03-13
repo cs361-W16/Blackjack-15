@@ -55,6 +55,11 @@ public class Game implements Serializable {
         Card new_card = deck.get(deck.size() - 1);
         deck.remove(deck.size() - 1);
 
+        // Aces low or high
+        if (new_card.fetchValue() == 11 && player.fetchHandValue() + 11 > 21) {
+            new_card.value = 1;
+        }
+
         // Give to user
         user.pushHand(new_card);
     }
