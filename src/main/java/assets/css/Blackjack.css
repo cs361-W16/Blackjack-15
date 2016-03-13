@@ -127,6 +127,22 @@ h1, p, span{
     flex-direction: column;
     justify-content: center;
 }
+
+/* I'm sorry */
+#WOWDOGE{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url('https://media.giphy.com/media/HCTfYH2Xk5yw/giphy.gif');
+    background-size: 100%;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* Animations
 .card.ng-enter{
     -webkit-transition: opacity 0.2s ease-in;

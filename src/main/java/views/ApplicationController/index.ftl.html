@@ -68,8 +68,13 @@
         </div>
 
         <!-- On error -->
-        <div id="dimmer" ng-show="invalidMove == true">
-            <p>Invalid Move!</p>
+        <div id="WOWDOGE" ng-show="playerLost">
+            <div style="display: flex; justify-content: center; flex-direction: column;">
+                <h1>You lose!</h1>
+                <md-button ng-click="newGame()" class="md-raised md-primary">
+                    NEW GAME
+                </md-button>
+            </div>
         </div>
     </body>
 </html>

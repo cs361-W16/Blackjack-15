@@ -51,6 +51,11 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
             } else if ($scope.gameState.round_winner == 2) {
                 alertUser("You tied with the dealer! Not too late to back out!");
             }
+
+            if($scope.gameState.player.money == 0){
+                $scope.playerLost = true;
+                $scope.$apply();
+            }
         });
     };
 
@@ -90,6 +95,8 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
         $http.post('/new_game/100').then(function(result) {
             $scope.gameState = result.data;
             clearMessage();
+            $scope.playerLost = false;
+            $scope.$apply();
             if ($scope.showLastCard == true) $scope.showLastCard = false;
         });
     };
