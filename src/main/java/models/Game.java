@@ -8,9 +8,9 @@ import java.io.Serializable;
 public class Game implements Serializable {
     /* Attributes */
     public java.util.List<Card> deck = new ArrayList<>();
-    public User player;
-    public User dealer;
-    public User playerSplit;
+    public Player player;
+    public Dealer dealer;
+    public Player playerSplit;
     public int current_bet;
     public int round_winner = 3;
     public int bet_factor = 2;
@@ -21,9 +21,9 @@ public class Game implements Serializable {
 
     /* Default constructor deals to only one player */
     public Game() {
-        player = new User();
-        dealer = new User();
-        playerSplit = new User();
+        player = new Player();
+        dealer = new Dealer();
+        playerSplit = new Player();
     }
 
 

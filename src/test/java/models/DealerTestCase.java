@@ -4,12 +4,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public class UserTestCase {
+public class DealerTestCase {
 
+    /* Dealer tests */
     @Test
     public void testPushHand() {
         Card card = new Card(3, Suit.clubs, 3);
-        User user = new User();
+        Dealer user = new Dealer();
 
         user.pushHand(card);
         assertEquals(card, user.peekHand());
@@ -19,7 +20,7 @@ public class UserTestCase {
 
     @Test
     public void testAddMoney() {
-        User user = new User();
+        Dealer user = new Dealer();
 
         user.setMoney(0);
         user.addMoney(20);
@@ -30,7 +31,7 @@ public class UserTestCase {
 
     @Test
     public void testSubtractInvalid() {
-        User user = new User();
+        Dealer user = new Dealer();
 
         user.setMoney(20);
         assertEquals(0, user.subtractMoney(30));
@@ -39,7 +40,7 @@ public class UserTestCase {
 
     @Test
     public void testSubtractValid() {
-        User user = new User();
+        Dealer user = new Dealer();
 
         user.setMoney(20);
         assertEquals(1, user.subtractMoney(10));
@@ -48,7 +49,7 @@ public class UserTestCase {
 
     @Test
     public void testFetchHandValue() {
-        User user = new User();
+        Dealer user = new Dealer();
         user.pushHand(new Card(3, Suit.spades, 3));
         user.pushHand(new Card(4, Suit.hearts, 4));
 
