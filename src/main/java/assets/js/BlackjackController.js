@@ -6,11 +6,21 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
     $scope.userMessage = '';
     $scope.gameState = {};
 
+    $scope.playerTotal = 0;
+    $scope.playerSplitTotal = 0;
+
     /* --- On page load --- */
 
     // Get initial game state
     $http.post('/new_game/100').then(function(result) {
         $scope.gameState = result.data;
+        $scope.playerTotal = calculateTotalValue($scope.gameState.player.hand);
+
+        $scope.$watch('gameState.player.hand', function(newHand, oldHand){
+            if(newHand.length != oldHand.length){
+                $scope.playerTotal = calculateTotalValue(newHand);
+            }
+        });
     });
 
     /* --- Actions --- */
@@ -27,21 +37,11 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
         });
     };
 
-   $scope.hitSplit = function() {
-        $http.post('/hit_split', $scope.gameState).then(function(result) {
-            $scope.gameState = result.data;
-
-            // Check if player lost from bust
-            if ($scope.gameState.round_winner == 0) {
-                // Tell the player they lost
-                alertUser("You lost - because you bust!");
-            }
-        });
-    };
-
     $scope.dealerTurn = function() {
         $http.post('/dealer_turn', $scope.gameState).then(function(result) {
             $scope.gameState = result.data;
+            console.log(result.data.dealer.hand);
+            console.log(result.data.player.hand);
 
             // Check if the player lost
             if ($scope.gameState.round_winner == 0) {
@@ -51,6 +51,11 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
             } else if ($scope.gameState.round_winner == 2) {
                 alertUser("You tied with the dealer! Not too late to back out!");
             }
+
+            // Start new game
+            /*$http.post('new_game/' + $scope.gameState.player.money).then(function(result) {
+                $scope.gameState = result.data;
+            });*/
         });
     };
 
@@ -63,6 +68,13 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
     $scope.split = function() {
         $http.post('/split', $scope.gameState).then(function(result) {
             $scope.gameState = result.data;
+            $scope.playerSplitTotal = calculateTotalValue($scope.gameState.playerSplit.hand);
+
+            $scope.$watch('gameState.playerSplit.hand', function(newHand, oldHand){
+                if(newHand.length != oldHand.length){
+                    $scope.playerSplitTotal = calculateTotalValue(newHand);
+                }
+            });
         });
     };
 
@@ -85,14 +97,24 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
         $http.post('raise/1', $scope.gameState).then(function(result) {
             $scope.gameState = result.data;
         });
-    }
+    };
 
     /* --- Helper functions --- */
+
     function alertUser(str){
         $scope.userMessage = str;
     }
 
     function clearMessage(){
         $scope.userMessage = '';
+    }
+
+    function calculateTotalValue(hand){
+        var sum = 0;
+        for(var i = 0; i < hand.length; i++){
+            sum += hand[i].value;
+        }
+
+        return sum;
     }
 });
