@@ -22,9 +22,9 @@
                 <div id="main">
                     <md-toolbar>
                         <div class="md-toolbar-tools">
-                                    <span>
-                                        Money: $<!--wat-->{{gameState.player.money}} - Bet: $<!--wat-->{{gameState.current_bet}} - Pot Value: wat
-                                    </span>
+                            <span>
+                                Money: $<!--wat-->{{gameState.player.money}} - Bet: $<!--wat-->{{gameState.current_bet}} - Pot Value: wat
+                            </span>
                             <span flex></span>
                             <md-button ng-click="newGame()" class="md-raised md-accent">
                                 NEW GAME
@@ -43,7 +43,7 @@
                             <div class="card-container">
                                 <div>
                                     <p>{{userMessage}}</p>
-                                    <md-button ng-if="userMessage.length > 0 && $scope.gameState.round_winner != 2" ng-click="newRound()">Continue</md-button>
+                                    <md-button ng-if="userMessage.length > 0 && gameState.round_winner != 2" ng-click="newRound()" class="md-raised">Continue</md-button>
                                 </div>
                                 <div style="margin: 0 4px; display: inline-block">
                                     <img ng-repeat="card in gameState.player.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
