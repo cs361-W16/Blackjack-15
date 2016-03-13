@@ -5,6 +5,7 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
     $scope.invalidMove = false;
     $scope.userMessage = '';
     $scope.gameState = {};
+    $scope.showLastCard = false;
 
     $scope.playerTotal = 0;
     $scope.playerSplitTotal = 0;
@@ -40,8 +41,7 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
     $scope.dealerTurn = function() {
         $http.post('/dealer_turn', $scope.gameState).then(function(result) {
             $scope.gameState = result.data;
-            console.log(result.data.dealer.hand);
-            console.log(result.data.player.hand);
+            $scope.showLastCard = true;
 
             // Check if the player lost
             if ($scope.gameState.round_winner == 0) {
@@ -51,11 +51,6 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
             } else if ($scope.gameState.round_winner == 2) {
                 alertUser("You tied with the dealer! Not too late to back out!");
             }
-
-            // Start new game
-            /*$http.post('new_game/' + $scope.gameState.player.money).then(function(result) {
-                $scope.gameState = result.data;
-            });*/
         });
     };
 
@@ -91,6 +86,7 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
             $scope.gameState = result.data;
         });
         clearMessage();
+        if ($scope.showLastCard == true) $scope.showLastCard = false;
     };
 
     $scope.raise = function() {
