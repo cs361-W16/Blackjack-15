@@ -40,7 +40,11 @@
                         </div>
                         <div id="playerRow">
                             <h1>You</h1>
-                            <div >
+                            <div class="card-container">
+                                <div>
+                                    <p>{{userMessage}}</p>
+                                    <md-button ng-if="userMessage.length > 0" ng-click="newGame()">Continue</md-button>
+                                </div>
                                 <img ng-repeat="card in gameState.player.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
                             </div>
                         </div>
