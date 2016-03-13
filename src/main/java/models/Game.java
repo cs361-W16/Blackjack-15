@@ -115,7 +115,7 @@ public class Game implements Serializable {
         int dealer_limit = 17;
         int dealer_hand_value = dealer.fetchHandValue();
 
-        while (dealer_hand_value <= dealer_limit) {
+        while (dealer_hand_value < dealer_limit) {
             hit(dealer);
             dealer_hand_value = dealer.fetchHandValue();
         }
@@ -149,6 +149,14 @@ public class Game implements Serializable {
         else {
             round_winner = 2;
             return 2;
+        }
+    }
+
+
+    /* Check if the player has busted. Sets round winner to dealer if bust. */
+    public void checkPlayerBust() {
+        if (player.fetchHandValue() > 21) {
+            round_winner = 0;
         }
     }
 
