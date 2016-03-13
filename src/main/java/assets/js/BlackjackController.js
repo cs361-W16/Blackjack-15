@@ -69,6 +69,12 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
         clearMessage();
     };
 
+    $scope.raise = function() {
+        $http.post('raise/1', $scope.gameState).then(function(result) {
+            $scope.gameState = result.data;
+        });
+    }
+
     /* --- Helper functions --- */
     function alertUser(str){
         $scope.userMessage = str;
