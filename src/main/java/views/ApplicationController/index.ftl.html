@@ -15,7 +15,7 @@
         <div class="wrapper">
             <div>
                 <div id="header">
-                    <h1 class="md-display-3">
+                    <h1 class="md-display-3" style="color: #121212;">
                         Blackjack
                     </h1>
                 </div>
@@ -35,7 +35,7 @@
                         <div id="dealerRow">
                             <h1>Dealer</h1>
                             <div class="card-container">
-                                <img ng-repeat="card in gameState.dealer.hand" ng-src="{{ (!$last || ($last && showLastCard)) && ('/assets/img/' + card.type + '_of_' + card.suit + '.png') || ('assets/img/doge.jpg')}}" class="card">
+                                <img ng-repeat="card in gameState.dealer.hand" ng-src="{{ (!$last || ($last && showLastCard)) && ('/assets/img/' + card.type + '_of_' + card.suit + '.png') || ('assets/img/doge.jpg')}}" class="card" ng-class="{'offset': !$first}">
                             </div>
                         </div>
                         <div id="playerRow">
@@ -46,10 +46,10 @@
                                     <md-button ng-if="userMessage.length > 0 && gameState.round_winner != 2" ng-click="newRound()" class="md-raised">Continue</md-button>
                                 </div>
                                 <div style="margin: 0 4px; display: inline-block">
-                                    <img ng-repeat="card in gameState.player.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
+                                    <img ng-repeat="card in gameState.player.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card" ng-class="{'offset': !$first}">
                                 </div>
                                 <div style="margin: 0 4px; display: inline-block">
-                                    <img ng-repeat="card in gameState.playerSplit.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
+                                    <img ng-repeat="card in gameState.playerSplit.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card" ng-class="{'offset': !$first}">
                                 </div>
                             </div>
                         </div>
@@ -57,12 +57,12 @@
                 </div>
 
                 <div class="user-actions">
-                    <md-button ng-click="raise()" class="md-primary md-raised">Bet</md-button>
-                    <md-button ng-click="hit()" class="md-primary md-raised">Hit</md-button>
-                    <md-button ng-if="gameState.playerSplit.hand.length > 0" ng-click="hitSplit()" class="md-primary md-raised">Hit 2</md-button>
-                    <md-button ng-click="dealerTurn()" class="md-primary md-raised">Stay</md-button>
-                    <md-button ng-click="doubleDown()" class="md-primary md-raised">Double Down</md-button>
-                    <md-button ng-click="split()" class="md-primary md-raised">Split</md-button>
+                    <md-button ng-click="raise()" class="md-accent md-raised">Bet</md-button>
+                    <md-button ng-click="hit()" class="md-accent md-raised">Hit</md-button>
+                    <md-button ng-if="gameState.playerSplit.hand.length > 0" ng-click="hitSplit()" class="md-accent md-raised">Hit 2</md-button>
+                    <md-button ng-click="dealerTurn()" class="md-accent md-raised">Stay</md-button>
+                    <md-button ng-click="doubleDown()" class="md-accent md-raised">Double Down</md-button>
+                    <md-button ng-click="split()" class="md-accent md-raised">Split</md-button>
                 </div>
             </div>
         </div>
