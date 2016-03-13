@@ -72,6 +72,18 @@ public class ApplicationController {
         return Results.json().render(current_game);
     }
 
+    /* Give the split player another card if hand value is under 21 */
+    public Result hitSplit(Context context, Game current_game) {
+        if (current_game.playerSplit.fetchHandValue() < 21) {
+            current_game.hit(current_game.playerSplit);
+
+            // Check if player busted
+            current_game.checkPlayerBust();
+        }
+
+        return Results.json().render(current_game);
+    }
+
 
     /* Dealer turn logic */
     public Result dealerTurn(Context context, Game current_game) {

@@ -156,8 +156,15 @@ public class Game implements Serializable {
 
     /* Check if the player has busted. Sets round winner to dealer if bust. */
     public void checkPlayerBust() {
-        if (player.fetchHandValue() > 21) {
-            round_winner = 0;
+        if (!split_hand) {
+            if (player.fetchHandValue() > 21) {
+                round_winner = 0;
+            }
+        }
+        if (split_hand) {
+            if (player.fetchHandValue() > 21 && playerSplit.fetchHandValue() > 21) {
+                round_winner = 0;
+            }
         }
     }
 
