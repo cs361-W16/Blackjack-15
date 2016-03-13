@@ -8,9 +8,9 @@ import java.io.Serializable;
 public class Game implements Serializable {
     /* Attributes */
     public java.util.List<Card> deck = new ArrayList<>();
-    public User player;
-    public User dealer;
-    public User playerSplit;
+    public Player player;
+    public Dealer dealer;
+    public Player playerSplit;
     public int current_bet;
     public int round_winner = 3;
     public int bet_factor = 2;
@@ -21,9 +21,9 @@ public class Game implements Serializable {
 
     /* Default constructor deals to only one player */
     public Game() {
-        player = new User();
-        dealer = new User();
-        playerSplit = new User();
+        player = new Player();
+        dealer = new Dealer();
+        playerSplit = new Player();
     }
 
 
@@ -32,14 +32,12 @@ public class Game implements Serializable {
         /* Add 14 cards per suit */
         int j;
         for(int i = 2; i < 15; i++){
-            if (i > 10) {
+            j = i;
+            if (i > 10){
                 j = 10;
             }
-            else if (i == 14) {
+            if (i == 14){
                 j = 11;
-            }
-            else {
-                j = i;
             }
             deck.add(new Card(j, Suit.clubs, i));
             deck.add(new Card(j, Suit.hearts, i));
@@ -56,6 +54,11 @@ public class Game implements Serializable {
         // Pull from deck
         Card new_card = deck.get(deck.size() - 1);
         deck.remove(deck.size() - 1);
+
+        // Aces low or high
+        if (new_card.fetchValue() == 11 && player.fetchHandValue() + 11 > 21) {
+            new_card.value = 1;
+        }
 
         // Give to user
         user.pushHand(new_card);
