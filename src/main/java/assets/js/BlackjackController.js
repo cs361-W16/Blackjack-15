@@ -18,7 +18,7 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
         $scope.playerTotal = calculateTotalValue($scope.gameState.player.hand);
 
         $scope.$watch('gameState.player.hand', function(newHand, oldHand){
-            if(newHand.length != oldHand.length){
+            if(handsDiffer(newHand, oldHand)){
                 $scope.playerTotal = calculateTotalValue(newHand);
             }
         });
@@ -66,7 +66,7 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
             $scope.playerSplitTotal = calculateTotalValue($scope.gameState.playerSplit.hand);
 
             $scope.$watch('gameState.playerSplit.hand', function(newHand, oldHand){
-                if(newHand.length != oldHand.length){
+                if(handsDiffer(newHand, oldHand)){
                     $scope.playerSplitTotal = calculateTotalValue(newHand);
                 }
             });
@@ -125,5 +125,19 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
         }
 
         return sum;
+    }
+
+    function handsDiffer(newHand, oldHand){
+        if(newHand.length != oldHand.length){
+            return true;
+        }else{
+            for(var i = 0; i < newHand.length; i++){
+                if(newHand[i].suit != oldHand[i].suit && newHand[i].type != oldHand[i].type){
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 });
