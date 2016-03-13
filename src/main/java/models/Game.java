@@ -32,14 +32,12 @@ public class Game implements Serializable {
         /* Add 14 cards per suit */
         int j;
         for(int i = 2; i < 15; i++){
-            if (i > 10) {
+            j = i;
+            if (i > 10){
                 j = 10;
             }
-            else if (i == 14) {
+            if (i == 14){
                 j = 11;
-            }
-            else {
-                j = i;
             }
             deck.add(new Card(j, Suit.clubs, i));
             deck.add(new Card(j, Suit.hearts, i));
