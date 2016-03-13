@@ -27,6 +27,18 @@ angular.module('Blackjack').controller('BlackjackController', function($scope, $
         });
     };
 
+   $scope.hitSplit = function() {
+        $http.post('/hit_split', $scope.gameState).then(function(result) {
+            $scope.gameState = result.data;
+
+            // Check if player lost from bust
+            if ($scope.gameState.round_winner == 0) {
+                // Tell the player they lost
+                alertUser("You lost - because you bust!");
+            }
+        });
+    };
+
     $scope.dealerTurn = function() {
         $http.post('/dealer_turn', $scope.gameState).then(function(result) {
             $scope.gameState = result.data;
