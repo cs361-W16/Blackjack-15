@@ -45,7 +45,12 @@
                                     <p>{{userMessage}}</p>
                                     <md-button ng-if="userMessage.length > 0 && $scope.gameState.round_winner != 2" ng-click="newRound()">Continue</md-button>
                                 </div>
-                                <img ng-repeat="card in gameState.player.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
+                                <div style="margin: 0 4px; display: inline-block">
+                                    <img ng-repeat="card in gameState.player.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
+                                </div>
+                                <div style="margin: 0 4px; display: inline-block">
+                                    <img ng-repeat="card in gameState.playerSplit.hand" ng-src="/assets/img/{{card.type}}_of_{{card.suit}}.png" class="card">
+                                </div>
                             </div>
                         </div>
                     </div>
